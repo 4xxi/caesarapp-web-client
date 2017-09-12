@@ -74,7 +74,14 @@
     </form>
   </div>
 </template>
-
+<style>
+  .multiselect__option--highlight {
+    background: #005de1;
+  }
+  .drop-file__file-input, .drop-file__label {
+    z-index: 0;
+  }
+</style>
 <script>
   import Vue from 'vue'
   import generatePassword from 'password-generator'
@@ -96,16 +103,16 @@
             'value': 10,
           },
           {
+            'name': '1 hour',
+            'value': 60,
+          },
+          {
             'name': '12 hours',
             'value': 720,
           },
           {
             'name': '24 hours',
             'value': 1440,
-          },
-          {
-            'name': '1 hour',
-            'value': 2160,
           }],
         'queriesLimit': [
           {
