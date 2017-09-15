@@ -3,21 +3,13 @@
     <div class="page-wrapper container">
       <section class="main">
         <section class="main__body">
-          <div class="main__logo-wrap">
-            <svg class="main__logo" width="555" height="133">
-              <use xlink:href="#icon-caesarapp-logo"></use>
-            </svg>
-            <svg class="main__logo main__logo--mobile" width="101" height="24">
-              <use xlink:href="#icon-caesarapp-logo-white"></use>
-            </svg>
-          </div>
+          <Logo></Logo>
           <div class="main__body-wrap">
             <EncryptForm @form-submitted="onFormSubmit"></EncryptForm>
           </div>
-
         </section>
         <aside class="main__info info">
-          <Info/>
+          <Info></Info>
         </aside>
       </section>
     </div>
@@ -30,6 +22,7 @@
   import EncryptForm from '~/components/EncryptForm.vue'
   import Info from '~/components/Info.vue'
   import Modal from '~/components/EncryptedMessageModal.vue'
+  import Logo from '~/components/Logo.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'
@@ -39,6 +32,7 @@
       EncryptForm,
       Info,
       Modal,
+      Logo,
     },
     data () {
       return {
