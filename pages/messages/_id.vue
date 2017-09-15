@@ -140,7 +140,7 @@
       axios.get(process.env.baseApiUrl + `/api/messages/` + this.$route.params.id).then(response => {
         this.encryptedMessage = response.data.encryptedMessage
       }).catch(e => {
-        this.errors.push(e)
+        this.$router.push('/404')
       })
     },
     methods: {
