@@ -1,6 +1,9 @@
+require('dotenv').config()
+
 module.exports = {
   env: {
-    baseApiUrl: process.env.BASE_API_URL || 'http://localhost:8080'
+    baseApiUrl: '//' + (process.env.SERVER_HOSTNAME + ':' +
+      process.env.SERVER_HTTP_PORT) || 'http://localhost:8080',
   },
   /*
   ** Headers of the page
