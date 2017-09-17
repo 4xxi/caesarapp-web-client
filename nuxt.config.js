@@ -26,6 +26,9 @@ module.exports = {
       {rel: 'stylesheet', href: '/assets/custom.css'},
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
     ],
+    script: [
+      {src: '/assets/custom.js'},
+    ],
   },
   css: [],
   /*
