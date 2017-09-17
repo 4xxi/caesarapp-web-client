@@ -60,7 +60,8 @@
       <div class="main__password">
         <p class="main__password-text" v-bind:style="{ display: !customPassword ? 'block' : 'none' }">
           The password for access will be generated randomly,
-          but <a href="#" class="main__link js-show-password-link" @click.prevent="customPassword = true">you can enter your own</a>.
+          but <a href="#" class="main__link js-show-password-link" @click.prevent="customPassword = true">you can enter
+          your own</a>.
         </p>
         <div class="main__password-wrap" v-bind:style="{ display: customPassword ? 'block' : 'none' }">
           <label for="passphrase" class="main__password-title subtitle">Password</label>
@@ -76,14 +77,7 @@
     </form>
   </div>
 </template>
-<style>
-  .multiselect__option--highlight {
-    background: #005de1;
-  }
-  .multiselect--active  {
-    z-index: 99;
-  }
-</style>
+
 <script>
   import Vue from 'vue'
   import generatePassword from 'password-generator'

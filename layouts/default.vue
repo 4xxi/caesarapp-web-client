@@ -9,17 +9,7 @@
 <script>
   export default {
     head: {
-      title: 'VENI, VIDI, ENCRYPTED',
-      meta: [
-        {charset: 'utf-8'},
-        {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      ],
-      link: [
-        {rel: 'stylesheet', href: '/assets/custom.css'},
-      ],
-      script: [
-        {src: '/assets/custom.js'},
-      ],
+      title: 'VENI, VIDI, ENCRYPTED'
     },
   }
 </script>

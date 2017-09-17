@@ -23,6 +23,7 @@ module.exports = {
       },
     ],
     link: [
+      {rel: 'stylesheet', href: '/assets/custom.css'},
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
     ],
   },
