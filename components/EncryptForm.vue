@@ -48,10 +48,12 @@
           <span class="file-load__title">{{ file.name }}</span>
           <button @click="removeFile(file.id)" type="button" class="file-load__del">Delete</button>
         </div>
-        <div v-for="file in errorFiles" class="file-load__load file-load__load--error">
-          <div class="file-load__load-left">
-            <p class="file-load__load-title">{{ file.name }}</p>
-            <p class="file-load__error">Error: {{ file.error }}</p>
+        <div v-for="file in errorFiles" class="main__file file-load">
+          <div class="file-load__load file-load__load--error">
+            <div class="file-load__load-left">
+              <p class="file-load__load-title">{{ file.name }}</p>
+              <p class="file-load__error">Error: {{ file.error }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -78,8 +80,8 @@
   .multiselect__option--highlight {
     background: #005de1;
   }
-  .drop-file__file-input, .drop-file__label {
-    z-index: 0;
+  .multiselect--active  {
+    z-index: 99;
   }
 </style>
 <script>
