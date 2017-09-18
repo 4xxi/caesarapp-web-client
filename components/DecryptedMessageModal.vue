@@ -34,7 +34,7 @@
             </button>
           </div>
           <div class="actions__right">
-            <a @click.prevent="close" href="#" class="actions__link">Close and go to vault.4xxi.com</a>
+            <a @click.prevent="close" href="#" class="actions__link">Close and go to home</a>
           </div>
         </div>
       </div>
