@@ -9,7 +9,7 @@
       <span class="info__title-text">Veni, Vidi, Encrypted</span>
     </p>
     <p class="info__text">
-      We built KeySafe so customers could securely send passwords and logins to us without
+      We built CaesarApp so customers could securely send passwords and logins to us without
       them living in our help desk software forever. We hope it is useful for you as well.
     </p>
     <p class="info__list-title">Great for:</p>
@@ -25,8 +25,9 @@
         </svg>
       </a>
       <p class="info__copyright-text">
-        Enjoy! Build by <a href="https://4xxi.com/" class="info__copyright-link">4xxi</a> team <br>
-        See our terms of service. © Copyright 2017</p>
+        Enjoy! Build by <a href="https://4xxi.com/" class="info__copyright-link">4xxi</a> team &copy; 2017 <br>
+        Made with ❤️ from Saint Petersburg.
+      </p>
     </div>
   </div>
 </template>
