@@ -1,5 +1,6 @@
 <template>
   <main class="page page--pattern">
+    <Ribbon></Ribbon>
     <div class="page-wrapper container">
       <section class="main">
         <section class="main__body">
@@ -23,6 +24,7 @@
   import Info from '~/components/Info.vue'
   import Modal from '~/components/EncryptedMessageModal.vue'
   import Logo from '~/components/Logo.vue'
+  import Ribbon from '~/components/GithubRibbon.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'
@@ -33,6 +35,7 @@
       Info,
       Modal,
       Logo,
+      Ribbon,
     },
     data () {
       return {
@@ -45,7 +48,7 @@
       }
     },
     head: {
-      title: 'VENI, VIDI, ENCRYPTED'
+      title: 'VENI, VIDI, ENCRYPTED',
     },
     methods: {
       onFormSubmit (data) {
