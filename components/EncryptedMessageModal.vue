@@ -21,7 +21,7 @@
               <textarea readonly ref="shared-message" class="result__result-text" wrap="soft"
                         title="Shared message">URL: {{message.link}}&#13;&#10;Password: {{message.password}}</textarea>
             </div>
-            <p class="result__text">Securely created with https://vault.4xxi.com</p>
+            <p class="result__text">Securely created with https://caesarapp.4xxi.com</p>
           </div>
           <div class="result__actions actions">
             <div class="actions__left">

@@ -3,15 +3,9 @@
     <div class="page-wrapper container">
       <section class="main main--pass">
         <section class="main__body">
-          <div class="main__logo-wrap">
-            <svg class="main__logo" width="555" height="133">
-              <use xlink:href="#icon-caesarapp-logo"></use>
-            </svg>
-            <svg class="main__logo main__logo--mobile" width="101" height="24">
-              <use xlink:href="#icon-caesarapp-logo-white"></use>
-            </svg>
-          </div>
-          <div v-if="ready" class="main__body-wrap">
+          <Logo></Logo>
+          <WaitLoader v-if="!encryptedMessage.length" class="loader"></WaitLoader>
+          <div v-bind:class="{ 'hide': !encryptedMessage.length}" class="main__body-wrap">
             <form ref="form" @submit.prevent="decryptMessage" action="#" method="POST" class="main__form">
               <div class="main__password">
                 <div class="main__password-wrap main__password-wrap--show">
@@ -33,14 +27,13 @@
             </form>
             <div class="main__secret">
               <p class="main__secret-text"><b>Secret Text</b></p>
-              <textarea class="main__secret-text" title="Secret Text">
+              <textarea readonly spellcheck="false" class="main__secret-text" title="Secret Text">
                 {{ encryptedMessage}}
               </textarea>
             </div>
           </div>
-          <div v-else class="main__body-wrap">
-            <WaitLoader></WaitLoader>
-          </div>
+
+
         </section>
         <aside class="main__info info">
           <p class="info__title">
@@ -77,11 +70,37 @@
     <Modal @modal-close="closeAndRefresh" v-bind:is-active="this.showMessage" v-bind:message="modalMessage"></Modal>
   </main>
 </template>
+<style>
+  textarea.main__secret-text {
+    background: #fff;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 150px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #343942;
+    letter-spacing: .04em;
+  }
 
+  .loader {
+    position: absolute;
+    left: 30%;
+    top: 50%;
+    transform: translate(-50px, -40px);
+    background: #fff;
+  }
+
+  .hide {
+    visibility: hidden;
+  }
+</style>
 <script>
   import Info from '~/components/Info.vue'
   import Modal from '~/components/DecryptedMessageModal.vue'
   import WaitLoader from '~/components/WaitLoader.vue'
+  import Logo from '~/components/Logo.vue'
 
   import axios from 'axios'
   import sjcl from 'sjcl'
@@ -91,6 +110,7 @@
       Info,
       Modal,
       WaitLoader,
+      Logo,
     },
     validate ({params}) {
       // Must be a number
@@ -98,7 +118,6 @@
     },
     data () {
       return {
-        ready: false,
         error: '',
         encryptedMessage: '',
         password: '',
@@ -113,16 +132,15 @@
       if (!this.$isServer) {
         let _this = this
         document.addEventListener('keyup', function (e) {
-          if (e.keyCode === 27 && _this.ready) { // escape key maps to keycode `27`
+          if (e.keyCode === 27 && _this.encryptedMessage.length > 0) { // escape key maps to keycode `27`
             _this.close()
           }
         })
       }
       axios.get(process.env.baseApiUrl + `/api/messages/` + this.$route.params.id).then(response => {
         this.encryptedMessage = response.data.encryptedMessage
-        this.ready = true
       }).catch(e => {
-        this.errors.push(e)
+        this.$router.push('/404')
       })
     },
     methods: {
@@ -138,7 +156,7 @@
           this.modalMessage = JSON.parse(sjcl.decrypt(this.password, atob(this.encryptedMessage)))
           return true
         } catch (e) {
-          this.error = e.message
+          this.error = 'Wrong password'
         }
         return false
       },
@@ -157,17 +175,7 @@
       },
     },
     head: {
-      title: 'VENI, VIDI, ENCRYPTED',
-      meta: [
-        {charset: 'utf-8'},
-        {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      ],
-      link: [
-        {rel: 'stylesheet', href: '/assets/custom.css'},
-      ],
-      script: [
-        {src: '/assets/custom.js'},
-      ],
+      title: 'VENI, VIDI, ENCRYPTED'
     },
   }
 </script>

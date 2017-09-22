@@ -18,7 +18,6 @@
 <script>
   import Vue from 'vue'
   import generatePassword from 'password-generator'
-  import sjcl from 'sjcl'
   import axios from 'axios'
 
   export default {

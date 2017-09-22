@@ -1,6 +1,9 @@
+require('dotenv').config()
+
 module.exports = {
   env: {
-    baseApiUrl: process.env.BASE_API_URL || 'http://localhost:8080'
+    baseApiUrl: '//' + (process.env.SERVER_HOSTNAME + ':' +
+      process.env.SERVER_HTTP_PORT) || 'http://localhost:8080',
   },
   /*
   ** Headers of the page
@@ -20,7 +23,11 @@ module.exports = {
       },
     ],
     link: [
+      {rel: 'stylesheet', href: '/assets/custom.css'},
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+    ],
+    script: [
+      {src: '/assets/custom.js'},
     ],
   },
   css: [],

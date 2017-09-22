@@ -48,17 +48,20 @@
           <span class="file-load__title">{{ file.name }}</span>
           <button @click="removeFile(file.id)" type="button" class="file-load__del">Delete</button>
         </div>
-        <div v-for="file in errorFiles" class="file-load__load file-load__load--error">
-          <div class="file-load__load-left">
-            <p class="file-load__load-title">{{ file.name }}</p>
-            <p class="file-load__error">Error: {{ file.error }}</p>
+        <div v-for="file in errorFiles" class="main__file file-load">
+          <div class="file-load__load file-load__load--error">
+            <div class="file-load__load-left">
+              <p class="file-load__load-title">{{ file.name }}</p>
+              <p class="file-load__error">Error: {{ file.error }}</p>
+            </div>
           </div>
         </div>
       </div>
       <div class="main__password">
         <p class="main__password-text" v-bind:style="{ display: !customPassword ? 'block' : 'none' }">
           The password for access will be generated randomly,
-          but <a href="#" class="main__link js-show-password-link" @click.prevent="customPassword = true">you can enter your own</a>.
+          but <a href="#" class="main__link js-show-password-link" @click.prevent="customPassword = true">you can enter
+          your own</a>.
         </p>
         <div class="main__password-wrap" v-bind:style="{ display: customPassword ? 'block' : 'none' }">
           <label for="passphrase" class="main__password-title subtitle">Password</label>
@@ -96,16 +99,16 @@
             'value': 10,
           },
           {
+            'name': '1 hour',
+            'value': 60,
+          },
+          {
             'name': '12 hours',
             'value': 720,
           },
           {
             'name': '24 hours',
             'value': 1440,
-          },
-          {
-            'name': '1 hour',
-            'value': 2160,
           }],
         'queriesLimit': [
           {
