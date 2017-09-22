@@ -11,8 +11,8 @@
         </p>
       </div>
       <div class="message__body get-pass">
-        <AutoResizeTextArea :value="message.secretMessage" :readonly="true" ref="message" class="get-pass__title"
-                  title="Shared text"></AutoResizeTextArea>
+        <textarea readonly ref="message" class="get-pass__title"
+                  title="Shared text">{{message.secretMessage}}</textarea>
         <div v-for="file in message.files" class="get-pass__files-list">
           <a @click.prevent="downloadFile(file.id)" v-bind:href="file.body" v-bind:download="file.name"
              class="get-pass__file file">
@@ -51,13 +51,12 @@
     margin: 0;
     background: #fff;
     width: 100%;
+    height: 20px;
     font-weight: 300;
-    max-height: 200px
   }
 </style>
 <script>
   import FileSaver from 'file-saver'
-  import AutoResizeTextArea from '~/components/AutoResizeTextArea.vue'
 
   const dataURItoBlob = function (dataURI) {
     // convert base64 to raw binary data held in a string
@@ -83,9 +82,6 @@
 
   export default {
     props: ['is-active', 'message'],
-    components: {
-      AutoResizeTextArea
-    },
     data () {
       return {
         'hasFiles': Object.keys(this.message.files).length,
@@ -93,7 +89,8 @@
     },
     methods: {
       copy () {
-        this.$refs['message'].copy()
+        this.$refs['message'].select()
+        document.execCommand('copy')
       },
       close () {
         this.$emit('modal-close')
