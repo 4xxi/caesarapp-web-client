@@ -1,0 +1,49 @@
+.multiselect {
+  min-height: 50px;
+
+  &__tags {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    min-height: 50px;
+    padding: 14px 40px 0 20px;
+  }
+
+  &__select {
+    height: 46px;
+
+    &::before {
+      color: #343942;
+      border-color: #343942 transparent transparent;
+    }
+
+    &:hover {
+
+      &::before {
+        color: #0092fa;
+        border-color: #0092fa transparent transparent;
+      }
+    }
+  }
+
+  &__single {
+    font-size: 18px;
+    letter-spacing: 0.4px;
+    color: #005ee0;
+
+    &:hover {
+      color: #005ee0;
+    }
+  }
+
+  &__option {
+    font-size: 18px;
+    letter-spacing: 0.4px;
+    padding: 14px 26px;
+
+    &--highlight {
+      background-color: #ffffff;
+      color: #0092fa;
+    }
+  }
+}

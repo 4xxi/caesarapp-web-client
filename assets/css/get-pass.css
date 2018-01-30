@@ -1,0 +1,16 @@
+.get-pass {
+
+  &__title {
+    margin-bottom: 20px;
+  }
+
+  &__files-list {
+    margin-bottom: 40px;
+  }
+
+  &__link {
+    font-weight: 600;
+    color: #005ee0;
+    color: var(--blue);
+  }
+}

@@ -1,0 +1,40 @@
+.textarea {
+  font-family: Rubik, sans-serif;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 20px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid #e6e6e6;
+  border: 1px solid var(--frames);
+  font-size: 18px;
+  color: #005ee0;
+  color: var(--blue);
+  margin-bottom: 40px;
+  word-wrap: break-word;
+
+  &:focus {
+    outline: none !important;
+    border:1px solid var(--hover);
+    box-shadow: 0;
+    color: #005ee0;
+    color: var(--blue);
+  }
+
+  &::selection {
+   background: #005ee0;
+   background: var(--blue);
+   color: #ffffff;
+   color: var(--white);
+  }
+
+  &_copied {
+    color: #0092fa;
+    color: var(--hover);
+  }
+
+  &_mt {
+    margin-top: 40px;
+  }
+}

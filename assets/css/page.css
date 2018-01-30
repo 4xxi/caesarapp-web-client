@@ -1,0 +1,76 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+  padding: 10px;
+
+  &_pattern {
+    background-image: url('../img/bg-main.png');
+
+    &_paranoid {
+      background-image: url('../img/bg-paranoid.png');
+    }
+  }
+
+  &_modal {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  &__wrapper {
+    width: 100%;
+    background-color: #ffffff;
+    background-color: var(--white);
+    padding-left: 40px;
+    padding-right: 40px;
+
+    &_paranoid {
+      background-color: transparent;
+    }
+
+    &_modal {
+      background-color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px dashed #005ee0;
+      border: 2px dashed var(--blue);
+    }
+  }
+
+  &__header,
+  &__footer{
+    margin-bottom: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  &__main {
+    margin-bottom: 80px;
+  }
+
+  &_aux {
+    padding: 0;
+  }
+
+  @media (width < 760px) {
+
+    &__wrapper,
+    &__header,
+    &__footer{
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  @media (width < 680px) {
+
+    padding: 5px;
+
+    &__wrapper {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.prompt {
+  float: right;
+  position: relative;
+
+  &__desc {
+    position: absolute;
+    color: #ffffff;
+    width: 170px;
+    right: -250px;
+    bottom: 5px;
+    font-family: 'Pangolin', cursive;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.8px;
+  }
+
+  &__arrow {
+    position: absolute;
+    left: -20px;
+    top: -60px;
+
+    &_mirrored {
+      bottom: -60px;
+      top: auto;
+    }
+  }
+}

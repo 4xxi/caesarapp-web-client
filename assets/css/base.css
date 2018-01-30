@@ -1,0 +1,91 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Rubik, sans-serif;
+}
+
+/* @start color */
+:root {
+  --dark-grey: #343942;
+  --white: #ffffff;
+  --blue: #005ee0;
+  --hover: #0092fa;
+  --grey: #b3b3b3;
+  --placeholder: #d9d9d9;
+  --frames: #e6e6e6;
+  --errors: #bd1622;
+}
+
+/* @end color */
+
+/* @start font */
+.web-textlabel-18 {
+  font-family: Rubik, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-align: left;
+  color: #343942;
+  color: var(--dark-grey);
+}
+
+.web-placeholder-18 {
+  font-family: Rubik, sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  text-align: left;
+  color: #d9d9d9;
+  color: var(--placeholder);
+}
+
+.web-typing-18 {
+  font-family: Rubik, sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.4px;
+  text-align: left;
+  color: #005ee0;
+  color: var(--blue);
+}
+
+.web-18 {
+  font-family: Rubik, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  letter-spacing: 0.4px;
+  text-align: left;
+  color: #343942;
+  color: var(--dark-grey);
+}
+
+.web-link-14 {
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-align: left;
+  color: #005ee0;
+  color: var(--blue);
+}
+
+.web-14 {
+  font-family: Rubik, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.6px;
+  text-align: left;
+}
+
+.web-12 {
+  font-family: Rubik, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: 0.4px;
+  text-align: center;
+}
+
+/* @end font */
