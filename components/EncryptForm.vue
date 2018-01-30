@@ -9,7 +9,6 @@
                             placeholder="Type"
                             name="message"></textarea>
             <File maxSize="250 KB" @file-added="onFileAdd" @file-error="onFileError"></File>
-
           </div>
         </div>
       </div>
@@ -134,7 +133,7 @@
         'name': 'No limit',
         'value': 0,
       },
-      'password': '',
+      'password': 'nopassword',
       'files': {},
       'errorFiles': {},
       'customPassword': false,
