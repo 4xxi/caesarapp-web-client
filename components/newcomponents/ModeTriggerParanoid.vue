@@ -8,7 +8,7 @@
     <div class="mode-trigger__desc mode-trigger__desc_paranoid">
       In this mode, the data is stored
       in your browser
-      <img src="~assets/img/arrow-paranoid.svg" alt="arrow" class="mode-trigger__arrow">
+      <img src="~assets/img/arrowparanoid.svg" alt="arrow" class="mode-trigger__arrow">
     </div>
   </div>
 </template>

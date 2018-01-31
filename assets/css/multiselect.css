@@ -10,9 +10,13 @@
   }
 
   &__select {
-    height: 46px;
+    height: 48px;
 
     &::before {
+      top: 70%;
+
+      border-width: 9px 9px 0;
+
       color: #343942;
       border-color: #343942 transparent transparent;
     }

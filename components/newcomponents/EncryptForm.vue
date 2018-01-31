@@ -1,33 +1,77 @@
 <template>
   <div>
-    <form @submit.prevent="onFormSubmit" action="#" method="POST" class="main__form">
+    <form
+      @submit.prevent="onFormSubmit"
+      action="#"
+      method="POST"
+      class="main__form"
+    >
       <div class="main__drop-file drop-file">
         <div class="drop-file__wrap">
           <label for="text" class="drop-file__title subtitle web-textlabel-18 ">Text or Image to Encrypt and
             Expire</label>
           <div class="drop-file__row">
-                  <textarea required v-model="secretMessage" id="text" cols="30" rows="4" class="drop-file__textarea"
-                            placeholder="Divide et Impera"
-                            name="message"></textarea>
-            <File maxSize="250 KB" @file-added="onFileAdd" @file-error="onFileError"></File>
+                  <textarea
+                    required v-model="secretMessage"
+                    id="text"
+                    cols="30"
+                    rows="4"
+                    class="drop-file__textarea"
+                    placeholder="Divide et Impera"
+                    name="message"
+                  >
+                  </textarea>
+            <File
+              maxSize="250 KB"
+              @file-added="onFileAdd"
+              @file-error="onFileError"
+            >
+            </File>
 
           </div>
         </div>
       </div>
       <div class="main__files">
-        <div v-for="file in files" class="main__file file-load">
-          <span class="file-load__type-icon">{{ file.ext }}</span>
-          <span class="file-load__title">{{ file.name }}</span>
-          <button @click="removeFile(file.id)" type="button" class="file-load__del">Delete</button>
+        <div
+          v-for="file in files"
+          class="main__file file-load"
+        >
+          <span
+            class="file-load__type-icon"
+          >
+            {{ file.ext }}
+          </span>
+          <span
+            class="file-load__title"
+          >
+            {{ file.name }}
+          </span>
+          <button
+            @click="removeFile(file.id)"
+            type="button"
+            class="file-load__del"
+          >
+            Delete
+          </button>
         </div>
-        <div v-for="file in errorFiles" class="file-load__load file-load__load--error">
+        <div
+          v-for="file in errorFiles"
+          class="file-load__load file-load__load--error"
+        >
           <div class="file-load__load-left">
-            <p class="file-load__load-title">{{ file.name }}</p>
-            <p class="file-load__error">Error: {{ file.error }}</p>
+            <p class="file-load__load-title">
+              {{ file.name }}
+            </p>
+            <p class="file-load__error">
+              Error: {{ file.error }}
+            </p>
           </div>
         </div>
       </div>
-      <div v-if="!$store.state.privateMode" class="main__expires expires">
+      <div
+        v-if="!isParanoiaOn"
+        class="main__expires expires"
+      >
         <div class="expires__row">
           <div class="expires__select-wrap expires__select-wrap--hours">
             <div class="expires__title web-textlabel-18">Data Expires After</div>
@@ -73,8 +117,35 @@
           </p>
         </div>
       </div>
-      <button type="submit" class="main__btn btn">Create Private Encryption</button>
-      <a href="#" class="main__link main__link_crypt">or Decrypt</a>
+      <button
+        type="submit"
+        :class="{
+            'main__btn': true,
+            'btn': true,
+            'btn_paranoid': isParanoiaOn
+        }"
+      >
+        Create Private Encryption
+      </button>
+      <div class="main__link-wrap">
+        <span
+          :class="{
+            'main__or': true,
+            'main__or_paranoid': isParanoiaOn
+          }"
+        >
+          or
+        </span>
+        <router-link
+          to="#"
+          :class="{
+            'main__link': true,
+            'main__link_crypt': true,
+            'main__link_crypt_paranoid': isParanoiaOn,
+        }">
+          Decrypt
+        </router-link>
+      </div>
     </form>
   </div>
 </template>
@@ -145,6 +216,11 @@
       'errorFiles': {},
       'customPassword': false,
     }),
+    computed: {
+      isParanoiaOn () {
+        return this.$store.state.privateMode
+      }
+    },
     methods: {
       onFileChange: function (e) {
         let files = e.target.files || e.dataTransfer.files

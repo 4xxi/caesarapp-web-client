@@ -2,7 +2,7 @@
   <main
     class="page page_pattern"
     v-bind:class="{
-      'page_pattern_paranoid': $store.state.privateMode,
+      'page_pattern_paranoid': isParanoiaOn,
       'page_modal':  $store.state.throwFiles}"
   >
 
@@ -18,7 +18,7 @@
       v-if="!$store.state.requestInProgress"
       class="page__wrapper"
       v-bind:class="{
-        'page_pattern_paranoid': $store.state.privateMode
+        'page_pattern_paranoid': isParanoiaOn
       }"
     >
       <a
@@ -53,7 +53,9 @@
           <header>
             <div class="header page__header">
               <Logo></Logo>
-              <ModeTrigger></ModeTrigger>
+              <ModeTrigger
+                :paranoiaMode="isParanoiaOn"
+              ></ModeTrigger>
             </div>
           </header>
           <main>
@@ -153,7 +155,10 @@
     },
     computed: {
       gitHubCatStyle () {
-        return !this.$store.state.privateMode ? this.gitHubCatStyleNormal : this.gitHubCatStylePrivate
+        return this.isParanoiaOn ? this.gitHubCatStylePrivate : this.gitHubCatStyleNormal
+      },
+      isParanoiaOn () {
+        return this.$store.state.privateMode
       }
     },
     methods: {

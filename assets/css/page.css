@@ -39,15 +39,22 @@
     }
   }
 
+  &__header {
+    margin-bottom: 40px;
+  }
+
+  &__footer {
+    margin-bottom: 36px;
+  }
+
   &__header,
   &__footer{
-    margin-bottom: 40px;
     padding-left: 40px;
     padding-right: 40px;
   }
 
   &__main {
-    margin-bottom: 80px;
+    margin-bottom: 7px;
   }
 
   &_aux {

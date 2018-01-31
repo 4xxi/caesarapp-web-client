@@ -3,15 +3,15 @@
   background-color: #ffffff;
   background-color: var(--white);
   border-radius: 4px;
-  padding: 40px;
+  padding: 33px 40px 40px;
 
   &__expires {
-    margin-bottom: 40px;
+    margin-bottom: 32px;
   }
 
   &__password {
     width: 580px;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
 
     &_decrypt {
       width: 720px;
@@ -77,6 +77,20 @@
     }
   }
 
+  &__link-wrap {
+    display: inline-block;
+  }
+
+  &__or {
+    color: #005ee0;
+    color: var(--blue);
+
+    &_paranoid {
+      color: #343942;
+      color: var(--dark-grey);
+    }
+  }
+
   &__link {
     border-bottom: 1px dashed #343942;
     text-decoration: none;
@@ -88,10 +102,11 @@
       letter-spacing: 0.6px;
       color: #005ee0;
       color: var(--blue);
+      transition: .2s linear;
 
-      &:visited {
-        color: #005ee0;
-        color: var(--blue);
+      &:visited,
+      &:hover {
+        color: #0092fa;
       }
 
       &_grey {
@@ -108,8 +123,19 @@
         color: #343942;
         color: var(--dark-grey);
         border-bottom: 1px solid #343942;
+
+        &:focus,
+        &:hover,
+        &:active,
+        &:visited {
+          color: #494F5C;
+        }
       }
     }
+  }
+
+  &__row-btn {
+    margin-bottom: 30px;
   }
 
   &__btn {
@@ -121,7 +147,7 @@
   }
 
   &__files {
-    margin-bottom: 40px;
+    margin-bottom: 26px;
   }
 
   &__inner {

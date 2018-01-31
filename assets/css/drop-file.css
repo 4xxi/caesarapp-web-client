@@ -1,11 +1,11 @@
 .drop-file {
 
   &__wrap {
-    margin-bottom: 40px;
+    margin-bottom: 35px;
   }
 
   &__title {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   &__row {

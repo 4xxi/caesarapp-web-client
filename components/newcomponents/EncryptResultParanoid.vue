@@ -12,7 +12,14 @@ Password: {{$store.state.encryptedResult.password}}
 Securely created with {{baseUrl}}</textarea>
     <div class="main__inner">
       <div>
-        <button @click.prevent="copy('link_message', $event)" class="main__btn main__btn_mb btn btn_paranoid">Copy URL & Password</button>
+        <div class="main__row-btn">
+          <button
+            @click.prevent="copy('link_message', $event)"
+            class="main__btn main__btn_mb btn btn_paranoid"
+          >
+            Copy URL & Password
+          </button>
+        </div>
       </div>
     </div>
     <div class="encrypt-result__title encrypt-result__title_paranoid web-textlabel-18">

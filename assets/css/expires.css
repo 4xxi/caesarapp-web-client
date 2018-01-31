@@ -10,7 +10,7 @@
   }
 
   &__title {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   @media (width < 900px) and (width >= 680px) {
