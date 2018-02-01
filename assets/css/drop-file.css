@@ -14,19 +14,36 @@
   }
 
   &__textarea {
-    font-family: Rubik, sans-serif;
     min-width: 580px;
     max-width: 580px;
     min-height: 44px;
     padding: 10px 20px;
+
+    border: 1px solid #e6e6e6;
+    border: 1px solid var(--frames);
+
+    color: #005ee0;
+    color: var(--blue);
+    font-family: Rubik, sans-serif;
+    font-size: 18px;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
-    border: 1px solid #e6e6e6;
-    border: 1px solid var(--frames);
-    font-size: 18px;
-    color: #005ee0;
-    color: var(--blue);
+
+    &::selection {
+      background: #005ee0;
+      background: var(--blue);
+      color: #ffffff;
+      color: var(--white);
+    }
+
+    &:focus {
+      border:1px solid var(--hover);
+
+      outline: none;
+      color: #005ee0;
+      color: var(--blue);
+    }
 
     &_decrypt {
       max-width:100%;
@@ -34,11 +51,11 @@
     }
 
     &::-webkit-input-placeholder {
+      color: #d9d9d9;
+      color: var(--placeholder);
       font-family: Rubik, sans-serif;
       font-size: 18px;
       letter-spacing: 0.4px;
-      color: #d9d9d9;
-      color: var(--placeholder);
     }
 
     &::-moz-placeholder {
@@ -64,20 +81,39 @@
       color: #d9d9d9;
       color: var(--placeholder);
     }
+
+    &::-webkit-scrollbar {
+      background: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 60px;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+
+      box-shadow: inset -8px 0px 0px white;
+
+      background-color: #e6e6e6;
+      background-color: var(--frames);
+    }
   }
 
   &__file {
+    display: block;
+    position: relative;
+
     width: 120px;
     height: 120px;
+
+    border: dashed 1px #cccccc;
+
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
-    border: dashed 1px #cccccc;
-    position: relative;
-    display: block;
+    cursor: pointer;
     overflow: hidden;
     transition: .2s linear;
-    cursor: pointer;
 
     &:active,
     &:focus,
@@ -100,11 +136,13 @@
 
   &__file-input {
     position: relative;
+    z-index: 89;
+
     width: 120px;
     height: 120px;
+
     cursor: pointer;
     opacity: 0;
-    z-index: 89;
   }
 
   &__label {

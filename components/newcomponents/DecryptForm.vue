@@ -5,8 +5,8 @@
         <div class="drop-file__wrap">
           <label for="text" class="drop-file__title subtitle web-textlabel-18 ">Encrypted text</label>
           <div class="drop-file__row">
-                  <textarea required v-model="encryptedMessage" id="text" cols="30" rows="4" class="drop-file__textarea drop-file__textarea_decrypt"
-                            placeholder="Divide et Impera"
+                  <textarea required v-model="encryptedMessage" id="text" cols="30" rows="4" class="textarea drop-file__textarea drop-file__textarea_decrypt"
+                            placeholder="Paste text here"
                             name="message"></textarea>
           </div>
         </div>
@@ -22,8 +22,35 @@
           </p>
         </div>
       </div>
-      <button type="submit" class="main__btn btn">Display Message</button>
-      <a href="#" class="main__link main__link_crypt">or Encrypt</a>
+      <button
+        type="submit"
+        :class="{
+            'main__btn': true,
+            'btn': true,
+            'btn_paranoid': isParanoiaOn
+        }"
+      >
+        Display Message
+      </button>
+      <div class="main__link-wrap">
+        <span
+          :class="{
+            'main__or': true,
+            'main__or_paranoid': isParanoiaOn
+          }"
+        >
+          or
+        </span>
+        <router-link
+          to="/newdesign"
+          :class="{
+              'main__link': true,
+              'main__link_crypt': true,
+              'main__link_crypt_paranoid': isParanoiaOn,
+          }">
+          Encrypt
+        </router-link>
+      </div>
     </form>
   </div>
 </template>
@@ -34,6 +61,11 @@
       encryptedMessage: '',
       password: '',
     }),
+    computed: {
+      isParanoiaOn () {
+        return this.$store.state.privateMode
+      }
+    },
     methods: {
       onFormSubmit: function (e) {
         let formData = {

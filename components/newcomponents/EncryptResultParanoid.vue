@@ -30,9 +30,12 @@ Securely created with {{baseUrl}}</textarea>
       <div>
         <button @click.prevent="copy('data_message', $event)" class="main__btn main__btn btn btn_paranoid">Copy Encrypted Text</button>
       </div>
-      <a href="#" class="main__link main__link_crypt main__link_crypt_grey">
+      <nuxt-link
+        to="/newdesign"
+        class="main__link main__link_crypt main__link_crypt_grey"
+      >
         Create New Encryption
-      </a>
+      </nuxt-link>
     </div>
   </div>
 </template>

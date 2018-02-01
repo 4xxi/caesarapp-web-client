@@ -84,6 +84,9 @@
   &__or {
     color: #005ee0;
     color: var(--blue);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
 
     &_paranoid {
       color: #343942;
@@ -93,18 +96,22 @@
 
   &__link {
     border-bottom: 1px dashed #343942;
+
+    outline: none;
     text-decoration: none;
 
     &_crypt {
-      border-bottom: none;
+      border: none;
+
+      background: none;
       font-size: 14px;
       font-weight: 600;
       letter-spacing: 0.6px;
       color: #005ee0;
       color: var(--blue);
+      outline: none;
       transition: .2s linear;
 
-      &:visited,
       &:hover {
         color: #0092fa;
       }
@@ -126,9 +133,9 @@
 
         &:focus,
         &:hover,
-        &:active,
-        &:visited {
-          color: #494F5C;
+        &:active {
+          color: #717B8F;
+          border-bottom: 1px solid #717B8F;
         }
       }
     }

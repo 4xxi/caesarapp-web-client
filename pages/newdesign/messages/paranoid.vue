@@ -1,11 +1,23 @@
 <template>
-  <main class="page page_pattern page_pattern_paranoid">
-    <div class="page__wrapper page__wrapper_paranoid">
+  <main
+    :class="{
+      'page': true,
+      'page_pattern': true,
+      'page_pattern_paranoid': isParanoiaOn
+    }"
+  >
+    <div
+      :class="{
+        'page__wrapper': true,
+        'paranoid': isParanoiaOn
+     }"
+    >
+      <GitHubCat />
       <div class="container">
         <div class="container__inner">
           <header>
             <div class="header page__header">
-              <LogoBigParanoid></LogoBigParanoid>
+              <LogoBigParanoid />
             </div>
           </header>
           <main>
@@ -28,6 +40,7 @@
   import LogoBigParanoid from '~/components/newcomponents/LogoBigParanoid.vue'
   import GoToUrlResParanoid from '~/components/newcomponents/GoToUrlResParanoid.vue'
   import PageFooter from '~/components/newcomponents/PageFooter.vue'
+  import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'
@@ -36,7 +49,8 @@
     components: {
       LogoBigParanoid,
       GoToUrlResParanoid,
-      PageFooter
+      PageFooter,
+      GitHubCat
     },
     data () {
       return {
@@ -57,6 +71,11 @@
       script: [
         {src: '/assets/custom.js'},
       ],
+    },
+    computed: {
+      isParanoiaOn () {
+        return this.$store.state.privateMode
+      }
     },
     methods: {
       onFormSubmit (data) {

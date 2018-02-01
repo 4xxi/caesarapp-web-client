@@ -1,9 +1,18 @@
 <template>
   <main
-    class="page page_pattern"
-    v-bind:class="{ 'page_pattern_paranoid': $store.state.privateMode}">
-    <div class="page__wrapper"
-         v-bind:class="{ 'page__wrapper_paranoid': $store.state.privateMode}">
+    :class="{
+      'page': true,
+      'page_pattern': true,
+      'page_pattern_paranoid': isParanoiaOn
+    }"
+  >
+    <div
+     :class="{
+        'page__wrapper': true,
+        'paranoid': isParanoiaOn
+     }"
+    >
+      <GitHubCat />
       <div class="container">
         <div class="container__inner">
           <header>
@@ -36,24 +45,12 @@
   import EncryptResultParanoid from '~/components/newcomponents/EncryptResultParanoid.vue'
   import ModeTriggerParanoid from '~/components/newcomponents/ModeTriggerParanoid.vue'
   import PageFooter from '~/components/newcomponents/PageFooter.vue'
+  import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'
 
   export default {
-    created () {
-      if (!('id' in this.$store.state.encryptedResult || 'data' in this.$store.state.encryptedResult)) {
-        this.$router.replace('/')
-      }
-    },
-    components: {
-      Logo,
-      ModeTrigger,
-      EncryptResult,
-      PageFooter,
-      EncryptResultParanoid,
-      ModeTriggerParanoid
-    },
     data () {
       return {
         progress: false,
@@ -62,6 +59,11 @@
           link: 'https://4xxi.com',
           password: '',
         },
+      }
+    },
+    created () {
+      if (!('id' in this.$store.state.encryptedResult || 'data' in this.$store.state.encryptedResult)) {
+        this.$router.replace('/')
       }
     },
     head: {
@@ -73,6 +75,11 @@
       script: [
         {src: '/assets/custom.js'},
       ],
+    },
+    computed: {
+      isParanoiaOn () {
+        return this.$store.state.privateMode
+      }
     },
     methods: {
       onFormSubmit (data) {
@@ -115,6 +122,15 @@
       closeAndRefresh () {
         this.showMessage = false
       },
+    },
+    components: {
+      Logo,
+      ModeTrigger,
+      EncryptResult,
+      PageFooter,
+      EncryptResultParanoid,
+      ModeTriggerParanoid,
+      GitHubCat
     },
   }
 </script>

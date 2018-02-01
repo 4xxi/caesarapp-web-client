@@ -137,7 +137,7 @@
           or
         </span>
         <router-link
-          to="#"
+          to="/newdesign/decrypt"
           :class="{
             'main__link': true,
             'main__link_crypt': true,

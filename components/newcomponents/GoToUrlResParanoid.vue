@@ -1,7 +1,7 @@
 <template>
   <div class="get-pass">
     <div for="message" class="get-pass__title web-textlabel-18">It's your secret</div>
-    <textarea disabled cols="10" ref="message" class="encrypt-result__textarea textarea" title="Message">{{$store.state.message.secretMessage}}</textarea>
+    <textarea disabled ref="message" class="encrypt-result__textarea textarea" title="Message">{{$store.state.message.secretMessage}}</textarea>
     <div class="get-pass__files-list">
       <div v-if="Object.keys($store.state.message.files).length > 0" v-for="file in $store.state.message.files">
         <a href="#" @click.prevent="downloadFile(file.id)" v-bind:href="file.body" v-bind:download="file.name" class="get-pass__file file">
@@ -20,7 +20,12 @@
           Download all files
         </button>
       </div>
-      <a href="/" class="main__link main__link_crypt main__link_crypt_grey">Create New Encryption</a>
+      <nuxt-link
+        to="/newdesign"
+        class="main__link main__link_crypt main__link_crypt_grey"
+      >
+        Create New Encryption
+      </nuxt-link>
     </div>
   </div>
 </template>

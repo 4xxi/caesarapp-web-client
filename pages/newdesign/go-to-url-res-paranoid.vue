@@ -1,6 +1,17 @@
 <template>
-  <main class="page page_pattern page_pattern_paranoid">
-    <div class="page__wrapper page__wrapper_paranoid">
+  <main
+    :class="{
+      'page': true,
+      'page_pattern': true,
+      'page_pattern_paranoid': isParanoiaOn
+    }"
+  >
+    <div
+      :class="{
+        'page__wrapper': true,
+        'paranoid': isParanoiaOn
+     }"
+    >
       <div class="container">
         <div class="container__inner">
           <header>
@@ -57,6 +68,11 @@
       script: [
         {src: '/assets/custom.js'},
       ],
+    },
+    computed: {
+      isParanoiaOn () {
+        return this.$store.state.privateMode
+      }
     },
     methods: {
       onFormSubmit (data) {

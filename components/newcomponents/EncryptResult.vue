@@ -14,7 +14,12 @@ Securely created with {{baseUrl}}</textarea>
       <div>
         <button @click.prevent="copy" class="main__btn main__btn btn">Copy All</button>
       </div>
-      <nuxt-link class="main__link main__link_crypt main__link_crypt_grey" to="/">Create New Encryption</nuxt-link>
+      <nuxt-link
+        class="main__link main__link_crypt main__link_crypt_grey"
+        to="/newdesign"
+      >
+        Create New Encryption
+      </nuxt-link>
     </div>
   </div>
 </template>

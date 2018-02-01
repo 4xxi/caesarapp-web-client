@@ -5,7 +5,7 @@
         <div class="drop-file__wrap">
           <label for="text" class="drop-file__title subtitle web-textlabel-18 ">Text or Image to Encrypt and Expire</label>
           <div class="drop-file__row">
-                  <textarea required v-model="secretMessage" id="text" cols="30" rows="4" class="drop-file__textarea drop-file__textarea_decrypt"
+                  <textarea required v-model="secretMessage" id="text" cols="30" rows="4" class="textarea drop-file__textarea drop-file__textarea_decrypt"
                             placeholder="Paste text here"
                             name="message"></textarea>
 

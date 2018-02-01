@@ -24,8 +24,9 @@
     background-color: var(--white);
     padding-left: 40px;
     padding-right: 40px;
+    transition: 300ms ease-in;
 
-    &_paranoid {
+    &.paranoid {
       background-color: transparent;
     }
 

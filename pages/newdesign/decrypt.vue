@@ -1,25 +1,42 @@
 <template>
   <main
-    class="page page_pattern page_pattern_paranoid">
-    <div class="page__wrapper page__wrapper_paranoid">
+    :class="{
+      'page': true,
+      'page_pattern': true,
+      'page_pattern_paranoid': isParanoiaOn
+    }"
+  >
+    <div
+      :class="{
+        'page__wrapper': true,
+        'paranoid': isParanoiaOn
+      }"
+    >
+      <GitHubCat />
       <div class="container">
         <div class="container__inner">
           <header>
             <div class="header page__header">
-              <Logo></Logo>
-              <ModeTrigger @disabled="true"></ModeTrigger>
+              <Logo />
+              <ModeTrigger
+                :paranoiaMode="isParanoiaOn"
+              >
+              </ModeTrigger>
             </div>
           </header>
           <main>
             <div class="main page__main">
               <div class="main_wrapper">
-                <DecryptForm @form-submitted="onFormSubmit"></DecryptForm>
+                <DecryptForm
+                  @form-submitted="onFormSubmit"
+                >
+                </DecryptForm>
               </div>
             </div>
           </main>
         </div>
         <footer>
-          <PageFooter></PageFooter>
+          <PageFooter />
         </footer>
       </div>
     </div>
@@ -31,25 +48,12 @@
   import ModeTrigger from '~/components/newcomponents/ModeTrigger.vue'
   import DecryptForm from '~/components/newcomponents/DecryptForm.vue'
   import PageFooter from '~/components/newcomponents/PageFooter.vue'
+  import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
 
   import sjcl from 'sjcl'
   import action from '../../utils/action'
 
   export default {
-    components: {
-      Logo,
-      ModeTrigger,
-      DecryptForm,
-      PageFooter,
-    },
-    created () {
-      this.$store.dispatch('toggleMode', true)
-      this.$store.subscribe((mutation, state) => {
-        if (mutation.type === action.DECRYPTED) {
-          this.$router.push('/newdesign/messages/paranoid')
-        }
-      })
-    },
     data () {
       return {
         progress: false,
@@ -61,6 +65,13 @@
         },
       }
     },
+    created () {
+      this.$store.subscribe((mutation, state) => {
+        if (mutation.type === action.DECRYPTED) {
+          this.$router.push('/newdesign/messages/paranoid')
+        }
+      })
+    },
     head: {
       title: 'VENI, VIDI, ENCRYPTED',
       meta: [
@@ -70,6 +81,11 @@
       script: [
         {src: '/assets/custom.js'},
       ],
+    },
+    computed: {
+      isParanoiaOn () {
+        return this.$store.state.privateMode
+      }
     },
     methods: {
       onFormSubmit (data) {
@@ -92,6 +108,13 @@
         }
         return false
       },
+    },
+    components: {
+      Logo,
+      ModeTrigger,
+      DecryptForm,
+      PageFooter,
+      GitHubCat
     },
   }
 </script>
