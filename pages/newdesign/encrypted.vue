@@ -12,6 +12,7 @@
         'paranoid': isParanoiaOn
      }"
     >
+      <GitHubCat />
       <div class="container">
         <div class="container__inner">
           <header>
@@ -44,6 +45,7 @@
   import EncryptResult from '~/components/newcomponents/EncryptResult.vue'
   import EncryptResultParanoid from '~/components/newcomponents/EncryptResultParanoid.vue'
   import PageFooter from '~/components/newcomponents/PageFooter.vue'
+  import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'
@@ -126,7 +128,8 @@
       ModeTrigger,
       EncryptResult,
       PageFooter,
-      EncryptResultParanoid
+      EncryptResultParanoid,
+      GitHubCat
     },
   }
 </script>

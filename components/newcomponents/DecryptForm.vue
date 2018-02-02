@@ -5,17 +5,40 @@
         <div class="drop-file__wrap">
           <label for="text" class="drop-file__title subtitle web-textlabel-18 ">Encrypted text</label>
           <div class="drop-file__row">
-                  <textarea required v-model="encryptedMessage" id="text" cols="30" rows="4" class="textarea drop-file__textarea drop-file__textarea_decrypt"
-                            placeholder="Paste text here"
-                            name="message"></textarea>
+            <textarea
+              required
+              v-model="encryptedMessage"
+              id="text"
+              cols="30"
+              rows="4"
+              :class="{
+                'textarea': true,
+                'drop-file__textarea': true,
+                'drop-file__textarea_decrypt': true,
+                'drop-file__textarea_paranoid': isParanoiaOn
+              }"
+              placeholder="Paste text here"
+              name="message"
+            >
+            </textarea>
           </div>
         </div>
       </div>
       <div class="main__password main__password_decrypt">
         <div class="main__password-wrap">
           <label for="passphrase" class="main__password-title subtitle web-textlabel-18">Password</label>
-          <input required v-model="password" type="password" class="main__password-input" id="passphrase" name="passphrase"
-                 placeholder="Hoc Voluerunt">
+          <input
+            required
+            v-model="password"
+            type="password"
+            :class="{
+              'main__password-input': true,
+              'main__password-input_paranoid': isParanoiaOn
+            }"
+            id="passphrase"
+            name="passphrase"
+            placeholder="Hoc Voluerunt"
+          >
           <p class="main__password-note">
             You should have been given this password with the link to this text
             randomly

@@ -18,10 +18,6 @@
           <header>
             <div class="header page__header">
               <Logo />
-              <ModeTrigger
-                :paranoiaMode="isParanoiaOn"
-              >
-              </ModeTrigger>
             </div>
           </header>
           <main>
@@ -45,7 +41,6 @@
 
 <script>
   import Logo from '~/components/newcomponents/Logo.vue'
-  import ModeTrigger from '~/components/newcomponents/ModeTrigger.vue'
   import DecryptForm from '~/components/newcomponents/DecryptForm.vue'
   import PageFooter from '~/components/newcomponents/PageFooter.vue'
   import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
@@ -111,7 +106,6 @@
     },
     components: {
       Logo,
-      ModeTrigger,
       DecryptForm,
       PageFooter,
       GitHubCat
