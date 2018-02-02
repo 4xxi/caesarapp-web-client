@@ -34,6 +34,10 @@
     text-transform: uppercase;
   }
 
+  &__link {
+    text-decoration: none;
+  }
+
   @media (width < 680px) {
     width: 200px;
 

@@ -97,6 +97,13 @@
       background-color: #e6e6e6;
       background-color: var(--frames);
     }
+
+    &_paranoid {
+
+      &:focus {
+        border: 1px solid #343942;
+      }
+    }
   }
 
   &__file {
@@ -124,11 +131,19 @@
         &__label {
           color: #0092fa;
           color: var(--hover);
+
+          &_paranoid {
+            color: #343942;
+          }
         }
 
         &__icon {
           fill: #0092fa;
           fill: var(--hover);
+
+          &_paranoid {
+            fill: #343942;
+          }
         }
       }
     }

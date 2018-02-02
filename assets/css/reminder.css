@@ -1,0 +1,48 @@
+.reminder {
+  position: absolute;
+  right: -180px;
+
+  &_url {
+    bottom: 0;
+  }
+
+  &_enc {
+    top: 0;
+  }
+
+  &__arrow {
+    position: absolute;
+
+    &_url {
+      top: -50px;
+      right: 80px;
+    }
+
+    &_enc {
+      bottom: -25px;
+      right: 80px;
+    }
+  }
+
+  &__desc {
+    position: absolute;
+    text-align: right;
+    width: 182px;
+    font-family: 'Pangolin', cursive;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.8px;
+    color: #fff;
+    color: var(--white);
+
+    &_url {
+      bottom: -75px;
+      right: -60px;
+    }
+
+    &_enc {
+      top: -75px;
+      right: -60px;
+    }
+  }
+}

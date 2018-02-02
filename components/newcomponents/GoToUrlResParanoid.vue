@@ -1,22 +1,67 @@
 <template>
   <div class="get-pass">
-    <div for="message" class="get-pass__title web-textlabel-18">It's your secret</div>
-    <textarea disabled ref="message" class="encrypt-result__textarea textarea" title="Message">{{$store.state.message.secretMessage}}</textarea>
+    <div
+      for="message"
+      class="get-pass__title web-textlabel-18"
+    >
+      It's your secret
+    </div>
+    <textarea
+      ref="message"
+      :class="{
+        'encrypt-result__textarea': true,
+        'textarea': true,
+        'textarea_paranoid': isParanoiaOn
+      }"
+      title="Message"
+    >
+      {{$store.state.message.secretMessage}}
+    </textarea>
     <div class="get-pass__files-list">
-      <div v-if="Object.keys($store.state.message.files).length > 0" v-for="file in $store.state.message.files">
-        <a href="#" @click.prevent="downloadFile(file.id)" v-bind:href="file.body" v-bind:download="file.name" class="get-pass__file file">
+      <div
+        v-if="Object.keys($store.state.message.files).length > 0"
+        v-for="file in $store.state.message.files"
+      >
+        <a
+
+          @click.prevent="downloadFile(file.id)"
+          :href="file.body"
+          :download="file.name"
+          :class="{
+            'get-pass__file': true,
+            'file': true,
+            'file_paranoid': isParanoiaOn
+          }"
+        >
           <div class="file__inner">
             <span class="file__type-icon">{{file.ext}}</span>
             <span class="file__type-name">{{file.name}}</span>
           </div>
-          <div class="get-pass__link web-14">Download</div>
+          <div
+            :class="{
+              'get-pass__link': true,
+              'web-14': true,
+              'get-pass__link_paranoid': isParanoiaOn,
+            }"
+          >
+            Download
+          </div>
         </a>
       </div>
     </div>
     <div class="main__inner">
       <div>
-        <button @click.prevent="copy('message', $event)" class="main__btn main__btn_mrl btn btn_paranoid">Copy text</button>
-        <button v-if="Object.keys($store.state.message.files).length > 0" class="main__btn btn btn_paranoid">
+        <button
+          @click.prevent="copy('message', $event)"
+          class="main__btn main__btn_mrl btn btn_paranoid"
+        >
+          Copy text
+        </button>
+        <button
+          v-if="Object.keys($store.state.message.files).length > 0"
+          class="main__btn btn btn_paranoid"
+          @click.prevent="downloadAll"
+        >
           Download all files
         </button>
       </div>
@@ -55,6 +100,11 @@
   }
 
   export default {
+    computed: {
+      isParanoiaOn () {
+        return this.$store.state.privateMode
+      }
+    },
     methods: {
       copy (ref, event) {
         this.$refs[ref].select()
@@ -63,11 +113,12 @@
         event.target.innerText = 'Copied'
       },
       downloadFile (id) {
-        let file = this.message.files[id]
+        console.log(id)
+        let file = this.$store.state.message.files[id]
         FileSaver.saveAs(dataURItoBlob(file.body), file.name)
       },
       downloadAll () {
-        Object.keys(this.message.files).forEach(id => this.downloadFile(id))
+        Object.keys(this.$store.state.message.files).forEach(id => this.downloadFile(id))
       },
     },
   }

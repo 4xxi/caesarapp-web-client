@@ -12,19 +12,19 @@
         'paranoid': isParanoiaOn
      }"
     >
-      <GitHubCat />
       <div class="container">
         <div class="container__inner">
           <header>
             <div class="header page__header">
               <Logo></Logo>
-              <ModeTriggerParanoid></ModeTriggerParanoid>
             </div>
           </header>
           <main>
             <div class="main page__main">
               <div class="main_wrapper">
-                <EncryptResultParanoid v-if="this.$store.state.privateMode"></EncryptResultParanoid>
+                <EncryptResultParanoid
+                  v-if="this.$store.state.privateMode"
+                />
                 <EncryptResult v-else></EncryptResult>
               </div>
             </div>
@@ -43,9 +43,7 @@
   import ModeTrigger from '~/components/newcomponents/ModeTrigger.vue'
   import EncryptResult from '~/components/newcomponents/EncryptResult.vue'
   import EncryptResultParanoid from '~/components/newcomponents/EncryptResultParanoid.vue'
-  import ModeTriggerParanoid from '~/components/newcomponents/ModeTriggerParanoid.vue'
   import PageFooter from '~/components/newcomponents/PageFooter.vue'
-  import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'
@@ -128,9 +126,7 @@
       ModeTrigger,
       EncryptResult,
       PageFooter,
-      EncryptResultParanoid,
-      ModeTriggerParanoid,
-      GitHubCat
+      EncryptResultParanoid
     },
   }
 </script>

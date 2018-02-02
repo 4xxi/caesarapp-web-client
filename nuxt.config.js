@@ -2,7 +2,7 @@ require('dotenv').config()
 
 module.exports = {
   env: {
-    baseApiUrl: process.env.BASE_API_URL || 'http://localhost:8080',
+    baseApiUrl: process.env.BASE_API_URL || 'http://localhost:8282',
     baseUrl: process.env.BASE_URL || 'http://localhost:3000'
   },
   /*

@@ -8,15 +8,22 @@
     >
       <div class="main__drop-file drop-file">
         <div class="drop-file__wrap">
-          <label for="text" class="drop-file__title subtitle web-textlabel-18 ">Text or Image to Encrypt and
-            Expire</label>
+          <label
+            for="text"
+            class="drop-file__title subtitle web-textlabel-18"
+          >
+            Text or Image to Encrypt and Expire
+          </label>
           <div class="drop-file__row">
                   <textarea
                     required v-model="secretMessage"
                     id="text"
                     cols="30"
                     rows="4"
-                    class="drop-file__textarea"
+                    :class="{
+                      'drop-file__textarea': true,
+                      'drop-file__textarea_paranoid': isParanoiaOn
+                    }"
                     placeholder="Divide et Impera"
                     name="message"
                   >
@@ -104,8 +111,16 @@
       <div class="main__password">
         <p class="main__password-text web-18" v-if="!customPassword">
           The password for access will be generated randomly,
-          but you can <a href="#" class="main__link js-show-password-link web-18"
-                         @click.prevent="customPassword = true">create your own</a>.
+          but you can
+          <button
+            :class="{
+              'main__link': true,
+              'main__link_btn': true,
+              'main__link_btn_paranoid': isParanoiaOn,
+              'js-show-password-link': true,
+              'web-18': true
+            }"
+            @click.prevent="customPassword = true">create your own</button>.
         </p>
         <div class="main__password-wrap" v-if="customPassword">
           <label for="passphrase" class="main__password-title subtitle web-textlabel-18">Password</label>

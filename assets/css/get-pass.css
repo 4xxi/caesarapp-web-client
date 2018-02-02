@@ -4,13 +4,35 @@
     margin-bottom: 20px;
   }
 
+  &__file {
+    width: 100%;
+    border: none;
+
+    background: none;
+    outline: none;
+
+    &:hover {
+
+      .get-pass__link {
+        opacity: 1;
+      }
+    }
+  }
+
   &__files-list {
     margin-bottom: 40px;
   }
 
   &__link {
+    opacity: 0;
     font-weight: 600;
     color: #005ee0;
     color: var(--blue);
+    transition: 200ms ease-in;
+
+    &_paranoid {
+      color: #343942;
+      color: var(--dark-grey);
+    }
   }
 }

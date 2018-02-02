@@ -95,10 +95,33 @@
   }
 
   &__link {
-    border-bottom: 1px dashed #343942;
+    padding: 0;
+    border: none;
 
+    background: none;
     outline: none;
     text-decoration: none;
+    cursor: pointer;
+    transition: .2s linear;
+
+    &_btn {
+      border-bottom: 1px dashed #343942;
+
+      &:hover {
+        border-bottom: 1px dashed #0092fa;
+
+        color: #0092fa;
+      }
+
+      &_paranoid {
+
+        &:hover {
+          border-bottom: 1px dashed #717B8F;
+
+          color: #717B8F;
+        }
+      }
+    }
 
     &_crypt {
       border: none;
@@ -158,6 +181,8 @@
   }
 
   &__inner {
+    position: relative;
+
     display: flex;
     justify-content: space-between;
     align-items: center;

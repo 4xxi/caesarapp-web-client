@@ -77,3 +77,9 @@
     }
   }
 </script>
+
+<style scoped>
+  .drop-file__wrap {
+    margin-bottom: 0;
+  }
+</style>
