@@ -1,6 +1,6 @@
 <template>
   <nuxt-link
-    to="/newdesign"
+    to="/"
     class="logo__link"
   >
     <div class="header__logo logo logo_big logo_paranoid">

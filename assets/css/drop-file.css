@@ -1,7 +1,11 @@
 .drop-file {
 
   &__wrap {
-    margin-bottom: 35px;
+    margin-bottom: 32px;
+
+    &_with-files {
+      margin-bottom: 40px;
+    }
   }
 
   &__title {
@@ -46,6 +50,8 @@
     }
 
     &_decrypt {
+      margin-bottom: 34px;
+
       max-width:100%;
       width: 720px;
     }

@@ -17,7 +17,8 @@
         <div class="container__inner">
           <header>
             <div class="header page__header">
-              <LogoBigParanoid />
+              <LogoBigParanoid v-if="isParanoiaOn" />
+              <LogoBig v-else />
             </div>
           </header>
           <main>
@@ -38,6 +39,7 @@
 
 <script>
   import LogoBigParanoid from '~/components/newcomponents/LogoBigParanoid.vue'
+  import LogoBig from '~/components/newcomponents/LogoBig.vue'
   import GoToUrlResParanoid from '~/components/newcomponents/GoToUrlResParanoid.vue'
   import PageFooter from '~/components/newcomponents/PageFooter.vue'
   import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
@@ -48,6 +50,7 @@
   export default {
     components: {
       LogoBigParanoid,
+      LogoBig,
       GoToUrlResParanoid,
       PageFooter,
       GitHubCat

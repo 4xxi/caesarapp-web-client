@@ -65,7 +65,7 @@
           or
         </span>
         <router-link
-          to="/newdesign"
+          to="/"
           :class="{
               'main__link': true,
               'main__link_crypt': true,

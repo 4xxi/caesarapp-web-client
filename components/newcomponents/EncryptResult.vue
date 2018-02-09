@@ -6,7 +6,7 @@
     <textarea cols="10" ref="message" class="encrypt-result__textarea textarea" title="Message">
 Follow the link and enter the password
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-URL: {{baseUrl}}/view/{{$store.state.encryptedResult.id}}
+URL: {{baseUrl}}/messages/{{$store.state.encryptedResult.id}}
 Password: {{$store.state.encryptedResult.password}}
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Securely created with {{baseUrl}}</textarea>
@@ -16,7 +16,7 @@ Securely created with {{baseUrl}}</textarea>
       </div>
       <nuxt-link
         class="main__link main__link_crypt main__link_crypt_grey"
-        to="/newdesign"
+        to="/"
       >
         Create New Encryption
       </nuxt-link>
@@ -35,6 +35,8 @@ Securely created with {{baseUrl}}</textarea>
       copy () {
         this.$refs['message'].select()
         document.execCommand('copy')
+        event.target.classList.add('btn__green')
+        event.target.innerText = 'Copied'
       },
     },
   }

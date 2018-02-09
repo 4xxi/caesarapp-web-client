@@ -1,15 +1,38 @@
 <template>
-  <nuxt-link to="/newdesign" class="logo__link">
-    <div class="header__logo logo" v-bind:class="{ 'logo_paranoid': $store.state.privateMode }">
-
-      <img v-if="!$store.state.privateMode" class="logo__icon"
-           alt="logo" src="~/assets/img/logo.svg">
-      <img v-else class="logo__icon"
-           alt="logo" src="~/assets/img/logo-paranoid.svg">
-
+  <nuxt-link to="/" class="logo__link">
+    <div
+      :class="{
+        'header__logo': true,
+        'logo': true,
+        'logo_big': true,
+        'logo_paranoid': isParanoiaOn
+      }"
+    >
+      <img
+        v-if="!isParanoiaOn"
+        class="logo__icon"
+        alt="logo"
+        src="~/assets/img/logo-big.svg"
+      >
+      <img
+        v-else
+        class="logo__icon"
+        alt="logo"
+        src="~/assets/img/logo-big-paranoid.svg"
+      >
       <div class="logo__desc">
         <div class="logo__header">Ave Caesar!</div>
       </div>
     </div>
   </nuxt-link>
 </template>
+
+<script>
+  export default {
+    computed: {
+      isParanoiaOn () {
+        return this.$store.state.privateMode
+      }
+    }
+  }
+</script>

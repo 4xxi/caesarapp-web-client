@@ -36,7 +36,7 @@
    import EncryptFormParanoid from '~/components/newcomponents/EncryptFormParanoid.vue'
    import EncryptResult from '~/components/newcomponents/EncryptResult.vue'
    import DecryptForm from '~/components/newcomponents/DecryptForm.vue'
-   import GoToUrl from '~/components/newcomponents/GoToUrl.vue'
+   import EnterPasswordForm from '~/components/newcomponents/EnterPasswordForm.vue'
    import GoToUrlRes from '~/components/newcomponents/GoToUrlRes.vue'
    import PageFooter from '~/components/newcomponents/PageFooter.vue'
 
@@ -50,7 +50,7 @@
        EncryptFormParanoid,
        EncryptResult,
        DecryptForm,
-       GoToUrl,
+       EnterPasswordForm,
        GoToUrlRes,
        PageFooter
      },

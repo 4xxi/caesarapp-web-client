@@ -5,7 +5,6 @@
         <div class="container__inner">
           <header>
             <div class="header page__header">
-              <Logo></Logo>
               <ModeTrigger></ModeTrigger>
             </div>
           </header>
@@ -44,7 +43,8 @@
       return /^\w{32}$/.test(params.id)
     },
     created () {
-      this.$store.dispatch('readMessage', this.$route.params.id)
+      console.log('hi')
+      console.log(this.$store.dispatch('readMessage', this.$route.params.id))
     }
   }
 </script>

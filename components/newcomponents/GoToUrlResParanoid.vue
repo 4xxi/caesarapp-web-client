@@ -11,6 +11,7 @@
       :class="{
         'encrypt-result__textarea': true,
         'textarea': true,
+        'textarea_no-files': !hasFiles,
         'textarea_paranoid': isParanoiaOn
       }"
       title="Message"
@@ -23,7 +24,6 @@
         v-for="file in $store.state.message.files"
       >
         <a
-
           @click.prevent="downloadFile(file.id)"
           :href="file.body"
           :download="file.name"
@@ -53,20 +53,29 @@
       <div>
         <button
           @click.prevent="copy('message', $event)"
-          class="main__btn main__btn_mrl btn btn_paranoid"
+          :class="{
+            'main__btn': true,
+            'main__btn_mrl': true,
+            'btn': true,
+            'btn_paranoid': isParanoiaOn
+          }"
         >
           Copy text
         </button>
         <button
-          v-if="Object.keys($store.state.message.files).length > 0"
-          class="main__btn btn btn_paranoid"
+          v-if="hasFiles"
+          :class="{
+            'main__btn': true,
+            'btn': true,
+            'btn_paranoid': isParanoiaOn
+          }"
           @click.prevent="downloadAll"
         >
           Download all files
         </button>
       </div>
       <nuxt-link
-        to="/newdesign"
+        to="/"
         class="main__link main__link_crypt main__link_crypt_grey"
       >
         Create New Encryption
@@ -103,6 +112,9 @@
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode
+      },
+      hasFiles () {
+        return Object.keys(this.$store.state.message.files).length > 0
       }
     },
     methods: {

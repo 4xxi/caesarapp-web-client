@@ -46,7 +46,7 @@
   import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
 
   import sjcl from 'sjcl'
-  import action from '../../utils/action'
+  import action from '../utils/action'
 
   export default {
     data () {

@@ -3,7 +3,7 @@ import axios from 'axios'
 export default {
   get (url, request) {
     return axios.get(url, request)
-      .then((response) => Promise.resolve(response.body.data))
+      .then((response) => Promise.resolve(response.data))
       .catch((error) => Promise.reject(error))
   },
   post (url, request) {

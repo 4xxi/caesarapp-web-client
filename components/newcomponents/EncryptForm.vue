@@ -7,7 +7,12 @@
       class="main__form"
     >
       <div class="main__drop-file drop-file">
-        <div class="drop-file__wrap">
+        <div
+          :class="{
+            'drop-file__wrap': true,
+            'drop-file__wrap_with-files': hasFiles
+          }"
+        >
           <label
             for="text"
             class="drop-file__title subtitle web-textlabel-18"
@@ -152,7 +157,7 @@
           or
         </span>
         <router-link
-          to="/newdesign/decrypt"
+          to="/decrypt"
           :class="{
             'main__link': true,
             'main__link_crypt': true,
@@ -175,10 +180,6 @@
   import 'assets/css/multiselect.css'
 
   export default {
-    components: {
-      File,
-      Multiselect,
-    },
     props: ['formSubmitted'],
     data: () => ({
       'options': {
@@ -188,17 +189,18 @@
             'value': 10,
           },
           {
+            'name': '1 hour',
+            'value': 2160,
+          },
+          {
             'name': '12 hours',
             'value': 720,
           },
           {
             'name': '24 hours',
             'value': 1440,
-          },
-          {
-            'name': '1 hour',
-            'value': 2160,
-          }],
+          }
+        ],
         'queriesLimit': [
           {
             'name': 'No limit',
@@ -234,6 +236,9 @@
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode
+      },
+      hasFiles () {
+        return Object.keys(this.files).length || Object.keys(this.errorFiles).length
       }
     },
     methods: {
@@ -291,5 +296,9 @@
         Vue.delete(this.files, id)
       },
     },
+    components: {
+      File,
+      Multiselect,
+    }
   }
 </script>

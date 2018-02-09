@@ -14,7 +14,7 @@
     >
 Follow the link and enter the password
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-URL: {{baseUrl}}/view/decrypt
+URL: {{baseUrl}}/decrypt
 Password: {{$store.state.encryptedResult.password}}
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Securely created with {{baseUrl}}
@@ -54,6 +54,7 @@ Securely created with {{baseUrl}}
       :class="{
         'encrypt-result__textarea': true,
         'textarea': true,
+        'textarea_encrypted-text': true,
         'textarea_paranoid': isParanoiaOn
       }"
       title="Message"
@@ -69,7 +70,7 @@ Securely created with {{baseUrl}}
         </button>
       </div>
       <nuxt-link
-        to="/newdesign"
+        to="/"
         class="main__link main__link_crypt main__link_crypt_grey"
       >
         Create New Encryption
