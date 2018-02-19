@@ -37,6 +37,12 @@ module.exports = {
   /*
   ** Build configuration
   */
+  router: {
+    routes: [
+      { path: '*', name: 'NotFound', component: 'pages/caesar-404.vue' },
+      { path: '/502', name: 'ServerError', component: 'pages/caesar-502.vue' }
+    ]
+  },
   build: {
     vendor: ['axios'],
     /*

@@ -183,6 +183,10 @@
 
   &__row-btn {
     margin-bottom: 30px;
+
+    &_wrap {
+      margin-left: auto;
+    }
   }
 
   &__btn {
