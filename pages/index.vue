@@ -104,64 +104,28 @@
     },
     methods: {
       onFormSubmit (data) {
-        this.$store.commit('REQUEST_IN_PROGRESS')
-        const thisStore = this.$store
-        const thisRouter = this.$router
+        // const thisStore = this.$store
+        // const thisRouter = this.$router
         this.progress = true
         this.showMessage = true
-
-        function encryptMessage (thisStore, thisRouter) {
-          instance.encrypt(data).then((message) => {
-            let encryptedMessage = {
-              'encryptedMessage': message,
-              'minutesLimit': data['minutesLimit']['value'],
-              'queriesLimit': data['queriesLimit']['value'],
-            }
-            if (thisStore.state.privateMode) {
-              thisStore.dispatch('createParanoidMessage', encryptedMessage).then(() => {
-                thisStore.commit('REQUEST_COMPLETE')
-                thisRouter.push('/encrypted')
-              })
-            } else {
-              thisStore.dispatch('createMessage', encryptedMessage).then(() => {
-                thisStore.commit('REQUEST_COMPLETE')
-                thisRouter.push('/encrypted')
-              })
-            }
-            thisStore.dispatch('applyPassword', data['password'])
-          })
-        }
-        encryptMessage(thisStore, thisRouter)
-        // let encryptedMessage = {
-        //   'encryptedMessage': instance.encrypt(data),
-        //   'minutesLimit': data['minutesLimit']['value'],
-        //   'queriesLimit': data['queriesLimit']['value'],
-        // }
-        // let encryptedMessage = {
-        //   'encryptedMessage': await btoa(sjcl.encrypt(data['password'], JSON.stringify({
-        //     'secretMessage': data['secretMessage'],
-        //     'files': data['files'],
-        //   })).toString()),
-        //   'minutesLimit': data['minutesLimit']['value'],
-        //   'queriesLimit': data['queriesLimit']['value'],
-        // }
-        // let encryptedMessage = {
-        //   'encryptedMessage': btoa(sjcl.encrypt(data['password'], JSON.stringify({
-        //     'secretMessage': data['secretMessage'],
-        //     'files': data['files'],
-        //   })).toString()),
-        //   'minutesLimit': data['minutesLimit']['value'],
-        //   'queriesLimit': data['queriesLimit']['value'],
-        // }
-        // if (this.$store.state.privateMode) {
-        //   this.$store.dispatch('createParanoidMessage', encryptedMessage).then(() => {
-        //     this.$store.commit('REQUEST_COMPLETE')
-        //     this.$router.push('/encrypted')
-        //   })
-        // } else {
-        //   this.$store.dispatch('createMessage', encryptedMessage)
-        // }
-        // this.$store.dispatch('applyPassword', data['password'])
+        this.$store.dispatch('REQUEST_IN_PROGRESS', true)
+        instance.encrypt(data).then((message) => {
+          let encryptedMessage = {
+            'encryptedMessage': message,
+            'minutesLimit': data['minutesLimit']['value'],
+            'queriesLimit': data['queriesLimit']['value'],
+          }
+          this.$store.dispatch('applyPassword', data['password'])
+          if (this.$store.state.privateMode) {
+            this.$store.dispatch('createParanoidMessage', encryptedMessage).then(() => {
+              this.$router.push('/encrypted')
+            })
+          } else {
+            this.$store.dispatch('createMessage', encryptedMessage).then(() => {
+              this.$router.push('/encrypted')
+            })
+          }
+        })
       },
       showModalMessage (id, password) {
         let props = this.$router.resolve({

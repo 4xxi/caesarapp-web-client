@@ -59,10 +59,13 @@ const createStore = () => {
       decrypted ({ commit }, data) {
         commit(action.DECRYPTED, data)
       },
+      REQUEST_IN_PROGRESS ({ commit }, inProgress) {
+        commit(action.REQUEST_IN_PROGRESS, inProgress)
+      }
     },
     mutations: {
-      REQUEST_IN_PROGRESS (state) {
-        state.requestInProgress = true
+      REQUEST_IN_PROGRESS (state, inProgress) {
+        state.requestInProgress = inProgress
       },
       REQUEST_COMPLETE (state) {
         state.requestInProgress = false
