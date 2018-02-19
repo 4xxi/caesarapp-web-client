@@ -8,7 +8,7 @@
         <div class="aux__block">
           <img src="~/assets/img/logo-dead.svg" alt="logo" class="aux__icon">
           <div class="aux__desc">There's nothing here, Brutus.</div>
-          <a href="" class="aux__link">Go home!</a>
+          <nuxt-link to="/" class="aux__link">Go home!</nuxt-link>
         </div>
       </div>
       <div class="aux__side aux__right">
