@@ -1,0 +1,60 @@
+.mode-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 205px;
+  position: relative;
+
+  &__cond {
+    font-size: 14px;
+    letter-spacing: 0.6px;
+    color: #343942;
+    color: var(--dark-grey);
+
+    &_paranoid {
+      color: #ffffff;
+      color: var(--white);
+    }
+  }
+
+  &__desc {
+    position: absolute;
+    bottom: -75px;
+    right: -60px;
+    text-align: right;
+    width: 182px;
+    font-family: 'Pangolin', cursive;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0.8px;
+    color: #b3b3b3;
+    color: var(--grey);
+
+    &_paranoid {
+      color: #737373;
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    top: -50px;
+    right: 0;
+  }
+
+  @media (width < 1050px) {
+
+    &__desc,
+    &__arrow {
+      display: none;
+    }
+  }
+
+  @media (width < 680px) {
+
+    width: auto;
+
+    &__cond {
+      display: none;
+    }
+  }
+}

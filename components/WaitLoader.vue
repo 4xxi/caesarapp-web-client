@@ -10,8 +10,12 @@
 
 <style>
   .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
     display: table;
-    margin: 0 auto;
+    margin-left: -50px;
+    margin-top: -40px;
     width: 50px;
     height: 40px;
     text-align: center;
@@ -19,7 +23,7 @@
   }
 
   .spinner > div {
-    background-color: #005de1;
+    background-color: #ffffff;
     height: 100%;
     width: 6px;
     display: inline-block;

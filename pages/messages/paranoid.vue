@@ -1,25 +1,30 @@
 <template>
-  <main class="page page_pattern">
-    <div class="page__wrapper">
+  <main
+    :class="{
+      'page': true,
+      'page_pattern': true,
+      'page_pattern_paranoid': isParanoiaOn
+    }"
+  >
+    <div
+      :class="{
+        'page__wrapper': true,
+        'paranoid': isParanoiaOn
+     }"
+    >
+      <GitHubCat />
       <div class="container">
         <div class="container__inner">
           <header>
             <div class="header page__header">
-              <Logo v-if="!doIKnowTheSecret" />
-              <LogoAve v-else />
+              <LogoBigParanoid v-if="isParanoiaOn" />
+              <LogoBig v-else />
             </div>
           </header>
           <main>
             <div class="main page__main">
               <div class="main_wrapper">
-                <EnterPasswordForm
-                  v-if="!doIKnowTheSecret"
-                  @form-submitted="onFormSubmit"
-                >
-                </EnterPasswordForm>
-                <GoToUrlResParanoid
-                  v-else
-                />
+                <GoToUrlResParanoid @form-submitted="onFormSubmit"></GoToUrlResParanoid>
               </div>
             </div>
           </main>
@@ -33,27 +38,31 @@
 </template>
 
 <script>
-  import Logo from '~/components/Logo.vue'
-  import LogoAve from '~/components/LogoAve.vue'
-  import ModeTrigger from '~/components/ModeTrigger.vue'
-  import EnterPasswordForm from '~/components/EnterPasswordForm.vue'
-  import PageFooter from '~/components/PageFooter.vue'
+  import LogoBigParanoid from '~/components/LogoBigParanoid.vue'
+  import LogoBig from '~/components/LogoBig.vue'
   import GoToUrlResParanoid from '~/components/GoToUrlResParanoid.vue'
+  import PageFooter from '~/components/PageFooter.vue'
+  import GitHubCat from '~/components/GitHubCat.vue'
 
   import sjcl from 'sjcl'
+  import axios from 'axios'
 
   export default {
+    components: {
+      LogoBigParanoid,
+      LogoBig,
+      GoToUrlResParanoid,
+      PageFooter,
+      GitHubCat
+    },
     data () {
       return {
         progress: false,
-        showMessage: '',
-        error: '',
-        encryptedMessage: null,
+        showMessage: false,
         modalMessage: {
           link: 'https://4xxi.com',
-          password: ''
+          password: '',
         },
-        secret: {}
       }
     },
     head: {
@@ -67,27 +76,12 @@
       ],
     },
     computed: {
-      doIKnowTheSecret () {
-        return Object.keys(this.secret).length
+      isParanoiaOn () {
+        return this.$store.state.privateMode
       }
     },
     methods: {
-      onFormSubmit (pass) {
-        this.showMessage = this.decrypt(pass)
-        if (this.showMessage) {
-          this.$store.dispatch('decrypted', this.secret)
-        }
-      },
-      decrypt (pass) {
-        try {
-          this.secret = JSON.parse(sjcl.decrypt(pass.password, atob(this.encryptedMessage)))
-          return true
-        } catch (e) {
-          this.error = e.message
-        }
-        return false
-      },
-      /* onFormSubmit (data) {
+      onFormSubmit (data) {
         this.progress = true
         this.showMessage = true
         let encryptedMessage = sjcl.encrypt(data['password'], JSON.stringify({
@@ -97,7 +91,9 @@
 
         axios.post(process.env.baseApiUrl + `/api/messages`,
           {
-            'encryptedMessage': btoa(encryptedMessage)
+            'encryptedMessage': btoa(encryptedMessage),
+            'minutesLimit': data['minutesLimit']['value'],
+            'queriesLimit': data['queriesLimit']['value'],
           },
         ).then(response => {
           this.progress = false
@@ -107,7 +103,7 @@
           this.progress = false
           this.showMessage = false
         })
-      }, */
+      },
       showModalMessage (id, password) {
         let props = this.$router.resolve({
           name: 'messages-id',
@@ -126,22 +122,6 @@
         this.showMessage = false
       },
     },
-    validate ({params}) {
-      // Must be a number
-      return /^\w{32}$/.test(params.id)
-    },
-    created () {
-      this.$store.dispatch('readMessage', this.$route.params.id)
-        .then(() => (this.encryptedMessage = this.$store.state.message.encryptedMessage))
-    },
-    components: {
-      Logo,
-      LogoAve,
-      ModeTrigger,
-      EnterPasswordForm,
-      PageFooter,
-      GoToUrlResParanoid
-    }
   }
 </script>
 

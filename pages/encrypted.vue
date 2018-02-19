@@ -1,25 +1,16 @@
 <template>
   <main
-    class="page page_pattern"
     :class="{
-      'page_pattern_paranoid': isParanoiaOn,
-      'page_modal':  $store.state.throwFiles}"
+      'page': true,
+      'page_pattern': true,
+      'page_pattern_paranoid': isParanoiaOn
+    }"
   >
-
-    <ThrowFiles
-      v-if="$store.state.throwFiles"
-    >
-    </ThrowFiles>
-    <WaitLoader
-      v-if="isPennding"
-    >
-    </WaitLoader>
     <div
-      v-if="!$store.state.requestInProgress"
-      :class="{
+     :class="{
         'page__wrapper': true,
         'paranoid': isParanoiaOn
-      }"
+     }"
     >
       <GitHubCat />
       <div class="container">
@@ -27,15 +18,15 @@
           <header>
             <div class="header page__header">
               <Logo></Logo>
-              <ModeTrigger
-                :paranoiaMode="isParanoiaOn"
-              ></ModeTrigger>
             </div>
           </header>
           <main>
             <div class="main page__main">
               <div class="main_wrapper">
-                <EncryptForm @form-submitted="onFormSubmit"></EncryptForm>
+                <EncryptResultParanoid
+                  v-if="this.$store.state.privateMode"
+                />
+                <EncryptResult v-else></EncryptResult>
               </div>
             </div>
           </main>
@@ -49,18 +40,15 @@
 </template>
 
 <script>
-  import Logo from '~/components/Logo.vue'
+  import Logo from '~/components/LogoAve.vue'
   import ModeTrigger from '~/components/ModeTrigger.vue'
-  import EncryptForm from '~/components/EncryptForm.vue'
+  import EncryptResult from '~/components/EncryptResult.vue'
+  import EncryptResultParanoid from '~/components/EncryptResultParanoid.vue'
   import PageFooter from '~/components/PageFooter.vue'
-  import ThrowFiles from '~/components/ThrowFiles.vue'
-  import WaitLoader from '~/components/WaitLoader.vue'
   import GitHubCat from '~/components/GitHubCat.vue'
 
-  // import sjcl from 'sjcl'
-  import worker from 'workerize-loader!../utils/worker'
-  /* import action from '../utils/action' */
-  let instance
+  import sjcl from 'sjcl'
+  import axios from 'axios'
 
   export default {
     data () {
@@ -70,8 +58,14 @@
         modalMessage: {
           link: 'https://4xxi.com',
           password: '',
-        }
+        },
       }
+    },
+    created () {
+      if (!('id' in this.$store.state.encryptedResult || 'data' in this.$store.state.encryptedResult)) {
+        this.$router.replace('/')
+      }
+      this.$store.dispatch('REQUEST_IN_PROGRESS', false) // reset preloader
     },
     head: {
       title: 'VENI, VIDI, ENCRYPTED',
@@ -83,43 +77,33 @@
         {src: '/assets/custom.js'},
       ],
     },
-    mounted () {
-      instance = worker()
-    },
-    created () {
-      this.$store.dispatch('REQUEST_IN_PROGRESS', false) // reset preloader
-    },
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode
-      },
-      isPennding () {
-        return this.$store.state.requestInProgress
       }
     },
     methods: {
       onFormSubmit (data) {
-        // const thisStore = this.$store
-        // const thisRouter = this.$router
         this.progress = true
         this.showMessage = true
-        this.$store.dispatch('REQUEST_IN_PROGRESS', true)
-        instance.encrypt(data).then((message) => {
-          let encryptedMessage = {
-            'encryptedMessage': message,
+        let encryptedMessage = sjcl.encrypt(data['password'], JSON.stringify({
+          'secretMessage': data['secretMessage'],
+          'files': data['files'],
+        })).toString()
+
+        axios.post(process.env.baseApiUrl + `/api/messages`,
+          {
+            'encryptedMessage': btoa(encryptedMessage),
             'minutesLimit': data['minutesLimit']['value'],
             'queriesLimit': data['queriesLimit']['value'],
-          }
-          this.$store.dispatch('applyPassword', data['password'])
-          if (this.$store.state.privateMode) {
-            this.$store.dispatch('createParanoidMessage', encryptedMessage).then(() => {
-              this.$router.push('/encrypted')
-            })
-          } else {
-            this.$store.dispatch('createMessage', encryptedMessage).then(() => {
-              this.$router.push('/encrypted')
-            })
-          }
+          },
+        ).then(response => {
+          this.progress = false
+          this.showModalMessage(response.data.id, data['password'])
+        }).catch(e => {
+          console.log(e)
+          this.progress = false
+          this.showMessage = false
         })
       },
       showModalMessage (id, password) {
@@ -143,12 +127,11 @@
     components: {
       Logo,
       ModeTrigger,
-      EncryptForm,
+      EncryptResult,
       PageFooter,
-      ThrowFiles,
-      WaitLoader,
+      EncryptResultParanoid,
       GitHubCat
-    }
+    },
   }
 </script>
 

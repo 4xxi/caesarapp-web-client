@@ -15,7 +15,7 @@
         {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       ],
       link: [
-        {rel: 'stylesheet', href: '/assets/custom.css'},
+        /* {rel: 'stylesheet', href: '/assets/custom.css'}, */
       ],
       script: [
         {src: '/assets/custom.js'},

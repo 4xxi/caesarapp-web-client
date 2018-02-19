@@ -1,0 +1,78 @@
+.aux {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 40px;
+  color: #ffffff;
+  color: var(--white);
+
+  &_throw-pilums {
+    flex-direction: column;
+    padding-top: 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__side {
+    width: 33%;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  &__left {
+    justify-content: flex-end;
+  }
+
+  &__center,
+  &__block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__right {
+    justify-content: flex-start;
+  }
+
+  &__logo {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+  }
+
+  &__type {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    line-height: 44px;
+  }
+
+  &__icon {
+    margin-bottom: 20px;
+  }
+
+  &__desc,
+  &__link{
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    color: var(--white);
+
+    &_blue {
+      color: #005ee0;
+      color: var(--blue);
+    }
+  }
+
+  &__block {
+
+    &:hover {
+      cursor: url("../img/icon-knife.svg"), auto;
+    }
+  }
+}
+

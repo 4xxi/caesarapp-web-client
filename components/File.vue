@@ -1,9 +1,30 @@
 <template>
-  <div v-bind:class="{ 'drop-file__file--active': isActive}" class="drop-file__file" @dragleave="onDragleave"
-       @dragenter="onDragenter" @drop="onDrop">
-    <input multiple @change="onFileChange" type="file" class="drop-file__file-input">
-    <p class="drop-file__label">
-      <svg class="drop-file__icon" width="27" height="20">
+  <div
+    :class="{ 'drop-file__file--active': isActive}"
+    class="drop-file__file"
+    @dragleave="onDragleave"
+    @dragenter="onDragenter"
+    @drop="onDrop"
+  >
+    <input
+      multiple
+      @change="onFileChange"
+      type="file"
+      class="drop-file__file-input"
+    >
+    <p
+      :class="{
+        'drop-file__label': true,
+        'drop-file__label_paranoid': isParanoiaOn
+      }"
+    >
+      <svg
+        :class="{
+          'drop-file__icon': true,
+          'drop-file__icon_paranoid': isParanoiaOn
+        }"
+        width="27"
+        height="20">
         <use xlink:href="#icon-upload"></use>
       </svg>
       Drop Files or <span class="drop-file__label-link">Browse</span></p>
@@ -22,6 +43,11 @@
     },
     created () {
       this.maxSizeInBtyes = filesizeParser(this.maxSize)
+    },
+    computed: {
+      isParanoiaOn () {
+        return this.$store.state.privateMode
+      }
     },
     methods: {
       onDragenter (e) {
