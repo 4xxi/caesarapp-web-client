@@ -16,7 +16,6 @@ const createStore = () => {
     },
     actions: {
       createMessage ({ commit }, params) {
-        commit(action.REQUEST_IN_PROGRESS)
         return api.post(process.env.baseApiUrl + `/api/messages`, params)
           .then((response) => commit(action.CREATED_MESSAGE, response.data))
           .catch((error) => commit(action.API_FAILURE, error))

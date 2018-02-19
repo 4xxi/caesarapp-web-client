@@ -125,6 +125,7 @@
               this.$router.push('/encrypted')
             })
           }
+          this.$store.dispatch('REQUEST_IN_PROGRESS', false)
         })
       },
       showModalMessage (id, password) {

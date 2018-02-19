@@ -23,7 +23,7 @@
   }
 
   .spinner > div {
-    background-color: #005de1;
+    background-color: #ffffff;
     height: 100%;
     width: 6px;
     display: inline-block;
