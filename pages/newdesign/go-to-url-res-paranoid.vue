@@ -36,9 +36,9 @@
 </template>
 
 <script>
-  import LogoBigParanoid from '~/components/newcomponents/LogoBigParanoid.vue'
-  import GoToUrlResParanoid from '~/components/newcomponents/GoToUrlResParanoid.vue'
-  import PageFooter from '~/components/newcomponents/PageFooter.vue'
+  import LogoBigParanoid from '~/components/LogoBigParanoid.vue'
+  import GoToUrlResParanoid from '~/components/GoToUrlResParanoid.vue'
+  import PageFooter from '~/components/PageFooter.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'

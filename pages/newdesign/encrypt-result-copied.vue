@@ -26,10 +26,10 @@
 </template>
 
 <script>
-  import LogoBig from '~/components/newcomponents/LogoBig.vue'
-  import ModeTrigger from '~/components/newcomponents/ModeTrigger.vue'
+  import LogoBig from '~/components/LogoBig.vue'
+  import ModeTrigger from '~/components/ModeTrigger.vue'
   import EncryptResultCopied from '~/components/newcomponents/EncryptResultCopied.vue'
-  import PageFooter from '~/components/newcomponents/PageFooter.vue'
+  import PageFooter from '~/components/PageFooter.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'

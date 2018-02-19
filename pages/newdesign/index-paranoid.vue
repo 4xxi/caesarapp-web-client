@@ -31,14 +31,14 @@
 
 <script>
    import LogoParanoid from '~/components/newcomponents/LogoParanoid.vue'
-   import LogoBig from '~/components/newcomponents/LogoBig.vue'
+   import LogoBig from '~/components/LogoBig.vue'
    import ModeTriggerParanoid from '~/components/newcomponents/ModeTriggerParanoid.vue'
    import EncryptFormParanoid from '~/components/newcomponents/EncryptFormParanoid.vue'
-   import EncryptResult from '~/components/newcomponents/EncryptResult.vue'
-   import DecryptForm from '~/components/newcomponents/DecryptForm.vue'
-   import EnterPasswordForm from '~/components/newcomponents/EnterPasswordForm.vue'
+   import EncryptResult from '~/components/EncryptResult.vue'
+   import DecryptForm from '~/components/DecryptForm.vue'
+   import EnterPasswordForm from '~/components/EnterPasswordForm.vue'
    import GoToUrlRes from '~/components/newcomponents/GoToUrlRes.vue'
-   import PageFooter from '~/components/newcomponents/PageFooter.vue'
+   import PageFooter from '~/components/PageFooter.vue'
 
    import sjcl from 'sjcl'
 

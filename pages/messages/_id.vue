@@ -33,12 +33,12 @@
 </template>
 
 <script>
-  import Logo from '~/components/newcomponents/Logo.vue'
-  import LogoAve from '~/components/newcomponents/LogoAve.vue'
-  import ModeTrigger from '~/components/newcomponents/ModeTrigger.vue'
-  import EnterPasswordForm from '~/components/newcomponents/EnterPasswordForm.vue'
-  import PageFooter from '~/components/newcomponents/PageFooter.vue'
-  import GoToUrlResParanoid from '~/components/newcomponents/GoToUrlResParanoid.vue'
+  import Logo from '~/components/Logo.vue'
+  import LogoAve from '~/components/LogoAve.vue'
+  import ModeTrigger from '~/components/ModeTrigger.vue'
+  import EnterPasswordForm from '~/components/EnterPasswordForm.vue'
+  import PageFooter from '~/components/PageFooter.vue'
+  import GoToUrlResParanoid from '~/components/GoToUrlResParanoid.vue'
 
   import sjcl from 'sjcl'
 

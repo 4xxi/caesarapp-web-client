@@ -11,7 +11,7 @@
     >
     </ThrowFiles>
     <WaitLoader
-      v-if="$store.state.requestInProgress"
+      v-if="isPennding"
     >
     </WaitLoader>
     <div
@@ -35,12 +35,7 @@
           <main>
             <div class="main page__main">
               <div class="main_wrapper">
-                <!--<DecryptForm @form-submitted="onFormSubmit"></DecryptForm>-->
                 <EncryptForm @form-submitted="onFormSubmit"></EncryptForm>
-                <!--<EncryptResult @encryptedResult="$store.state.encryptedResult"></EncryptResult>-->
-                <!--<EncryptResult></EncryptResult>-->
-                <!--<GoToUrl @form-submitted="onFormSubmit"></GoToUrl>-->
-                <!--<GoToUrlRes></GoToUrlRes>-->
               </div>
             </div>
           </main>
@@ -54,21 +49,18 @@
 </template>
 
 <script>
-  import Logo from '~/components/newcomponents/Logo.vue'
-  import LogoBig from '~/components/newcomponents/LogoBig.vue'
-  import ModeTrigger from '~/components/newcomponents/ModeTrigger.vue'
-  import EncryptForm from '~/components/newcomponents/EncryptForm.vue'
-  import EncryptResult from '~/components/newcomponents/EncryptResult.vue'
-  import DecryptForm from '~/components/newcomponents/DecryptForm.vue'
-  import EnterPasswordForm from '~/components/newcomponents/EnterPasswordForm.vue'
-  import GoToUrlRes from '~/components/newcomponents/GoToUrlRes.vue'
-  import PageFooter from '~/components/newcomponents/PageFooter.vue'
-  import ThrowFiles from '~/components/newcomponents/ThrowFiles.vue'
-  import WaitLoader from '~/components/newcomponents/WaitLoader.vue'
-  import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
+  import Logo from '~/components/Logo.vue'
+  import ModeTrigger from '~/components/ModeTrigger.vue'
+  import EncryptForm from '~/components/EncryptForm.vue'
+  import PageFooter from '~/components/PageFooter.vue'
+  import ThrowFiles from '~/components/ThrowFiles.vue'
+  import WaitLoader from '~/components/WaitLoader.vue'
+  import GitHubCat from '~/components/GitHubCat.vue'
 
-  import sjcl from 'sjcl'
-  import action from '../utils/action'
+  // import sjcl from 'sjcl'
+  import worker from 'workerize-loader!../utils/worker'
+  /* import action from '../utils/action' */
+  let instance
 
   export default {
     data () {
@@ -91,38 +83,85 @@
         {src: '/assets/custom.js'},
       ],
     },
-    created () {
+    mounted () {
+      instance = worker()
+    },
+    /* created () {
       this.$store.subscribe((mutation, state) => {
         if (mutation.type === action.CREATED_MESSAGE ||
-        mutation.type === action.CREATED_PARANOID_MESSAGE) {
+        mutation.type === action.REQUEST_COMPLETE) {
           this.$router.push('/encrypted')
         }
       })
-    },
+    }, */
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode
+      },
+      isPennding () {
+        return this.$store.state.requestInProgress
       }
     },
     methods: {
       onFormSubmit (data) {
-        // console.log(data)
+        this.$store.commit('REQUEST_IN_PROGRESS')
+        const thisStore = this.$store
+        const thisRouter = this.$router
         this.progress = true
         this.showMessage = true
-        let encryptedMessage = {
-          'encryptedMessage': btoa(sjcl.encrypt(data['password'], JSON.stringify({
-            'secretMessage': data['secretMessage'],
-            'files': data['files'],
-          })).toString()),
-          'minutesLimit': data['minutesLimit']['value'],
-          'queriesLimit': data['queriesLimit']['value'],
+
+        function encryptMessage (thisStore, thisRouter) {
+          instance.encrypt(data).then((message) => {
+            let encryptedMessage = {
+              'encryptedMessage': message,
+              'minutesLimit': data['minutesLimit']['value'],
+              'queriesLimit': data['queriesLimit']['value'],
+            }
+            if (thisStore.state.privateMode) {
+              thisStore.dispatch('createParanoidMessage', encryptedMessage).then(() => {
+                thisStore.commit('REQUEST_COMPLETE')
+                thisRouter.push('/encrypted')
+              })
+            } else {
+              thisStore.dispatch('createMessage', encryptedMessage).then(() => {
+                thisStore.commit('REQUEST_COMPLETE')
+                thisRouter.push('/encrypted')
+              })
+            }
+            thisStore.dispatch('applyPassword', data['password'])
+          })
         }
-        if (this.$store.state.privateMode) {
-          this.$store.dispatch('createParanoidMessage', encryptedMessage)
-        } else {
-          this.$store.dispatch('createMessage', encryptedMessage)
-        }
-        this.$store.dispatch('applyPassword', data['password'])
+        encryptMessage(thisStore, thisRouter)
+        // let encryptedMessage = {
+        //   'encryptedMessage': instance.encrypt(data),
+        //   'minutesLimit': data['minutesLimit']['value'],
+        //   'queriesLimit': data['queriesLimit']['value'],
+        // }
+        // let encryptedMessage = {
+        //   'encryptedMessage': await btoa(sjcl.encrypt(data['password'], JSON.stringify({
+        //     'secretMessage': data['secretMessage'],
+        //     'files': data['files'],
+        //   })).toString()),
+        //   'minutesLimit': data['minutesLimit']['value'],
+        //   'queriesLimit': data['queriesLimit']['value'],
+        // }
+        // let encryptedMessage = {
+        //   'encryptedMessage': btoa(sjcl.encrypt(data['password'], JSON.stringify({
+        //     'secretMessage': data['secretMessage'],
+        //     'files': data['files'],
+        //   })).toString()),
+        //   'minutesLimit': data['minutesLimit']['value'],
+        //   'queriesLimit': data['queriesLimit']['value'],
+        // }
+        // if (this.$store.state.privateMode) {
+        //   this.$store.dispatch('createParanoidMessage', encryptedMessage).then(() => {
+        //     this.$store.commit('REQUEST_COMPLETE')
+        //     this.$router.push('/encrypted')
+        //   })
+        // } else {
+        //   this.$store.dispatch('createMessage', encryptedMessage)
+        // }
+        // this.$store.dispatch('applyPassword', data['password'])
       },
       showModalMessage (id, password) {
         let props = this.$router.resolve({
@@ -144,13 +183,8 @@
     },
     components: {
       Logo,
-      LogoBig,
       ModeTrigger,
       EncryptForm,
-      EncryptResult,
-      DecryptForm,
-      EnterPasswordForm,
-      GoToUrlRes,
       PageFooter,
       ThrowFiles,
       WaitLoader,

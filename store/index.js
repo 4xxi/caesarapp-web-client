@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import api from '../utils/api.js'
 import action from '../utils/action.js'
+import sjcl from 'sjcl'
 
 const createStore = () => {
   return new Vuex.Store({
@@ -21,7 +22,28 @@ const createStore = () => {
           .catch((error) => commit(action.API_FAILURE, error))
       },
       createParanoidMessage ({ commit }, params) {
-        commit(action.CREATED_PARANOID_MESSAGE, params.encryptedMessage)
+        let promise = new Promise((resolve, reject) => {
+          try {
+            commit(action.CREATED_PARANOID_MESSAGE, params.encryptedMessage)
+            resolve()
+          } catch (e) {
+            reject(e)
+          }
+        })
+        return promise
+      },
+      encryptMessage ({ commit }, data) {
+        return new Promise((resolve, reject) => {
+          let encryptedMessage = {
+            'encryptedMessage': btoa(sjcl.encrypt(data['password'], JSON.stringify({
+              'secretMessage': data['secretMessage'],
+              'files': data['files'],
+            })).toString()),
+            'minutesLimit': data['minutesLimit']['value'],
+            'queriesLimit': data['queriesLimit']['value'],
+          }
+          resolve(encryptedMessage)
+        })
       },
       readMessage ({ commit }, id) {
         return api.get(process.env.baseApiUrl + `/api/messages/` + id)
@@ -42,9 +64,10 @@ const createStore = () => {
       REQUEST_IN_PROGRESS (state) {
         state.requestInProgress = true
       },
-      CREATED_PARANOID_MESSAGE (state, data) {
-        state.requestFailed = false
+      REQUEST_COMPLETE (state) {
         state.requestInProgress = false
+      },
+      CREATED_PARANOID_MESSAGE (state, data) {
         state.encryptedResult.data = data
       },
       CREATED_MESSAGE (state, data) {

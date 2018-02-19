@@ -40,7 +40,7 @@
   import LogoParanoid from '~/components/newcomponents/LogoParanoid.vue'
   import ModeTriggerParanoid from '~/components/newcomponents/ModeTriggerParanoid.vue'
   import GoToUrlParanoid from '~/components/newcomponents/GoToUrlParanoid.vue'
-  import PageFooter from '~/components/newcomponents/PageFooter.vue'
+  import PageFooter from '~/components/PageFooter.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'

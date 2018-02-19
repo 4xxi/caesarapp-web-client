@@ -1,21 +1,92 @@
 <template>
   <div>
-    <form @submit.prevent="onFormSubmit" action="#" method="POST" class="main__form">
+    <form
+      @submit.prevent="onFormSubmit"
+      action="#"
+      method="POST"
+      class="main__form"
+    >
       <div class="main__drop-file drop-file">
-        <div class="drop-file__wrap">
-          <label for="text" class="drop-file__title subtitle">Text or Image to Encrypt and Expire</label>
+        <div
+          :class="{
+            'drop-file__wrap': true,
+            'drop-file__wrap_with-files': hasFiles
+          }"
+        >
+          <label
+            for="text"
+            class="drop-file__title subtitle web-textlabel-18"
+          >
+            Text or Image to Encrypt and Expire
+          </label>
           <div class="drop-file__row">
-                  <textarea required v-model="secretMessage" id="text" cols="30" rows="5" class="textarea drop-file__textarea"
-                            placeholder="Type"
-                            name="message"></textarea>
-            <File maxSize="250 KB" @file-added="onFileAdd" @file-error="onFileError"></File>
+                  <textarea
+                    required v-model="secretMessage"
+                    id="text"
+                    cols="30"
+                    rows="4"
+                    :class="{
+                      'drop-file__textarea': true,
+                      'drop-file__textarea_paranoid': isParanoiaOn
+                    }"
+                    placeholder="Divide et Impera"
+                    name="message"
+                  >
+                  </textarea>
+            <File
+              maxSize="250 KB"
+              @file-added="onFileAdd"
+              @file-error="onFileError"
+            >
+            </File>
+
           </div>
         </div>
       </div>
-      <div class="main__expires expires">
-        <p class="expires__title subtitle">Text Expires After</p>
+      <div class="main__files">
+        <div
+          v-for="file in files"
+          class="main__file file-load"
+        >
+          <span
+            class="file-load__type-icon"
+          >
+            {{ file.ext }}
+          </span>
+          <span
+            class="file-load__title"
+          >
+            {{ file.name }}
+          </span>
+          <button
+            @click="removeFile(file.id)"
+            type="button"
+            class="file-load__del"
+          >
+            Delete
+          </button>
+        </div>
+        <div
+          v-for="file in errorFiles"
+          class="file-load__load file-load__load--error"
+        >
+          <div class="file-load__load-left">
+            <p class="file-load__load-title">
+              {{ file.name }}
+            </p>
+            <p class="file-load__error">
+              Error: {{ file.error }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        v-if="!isParanoiaOn"
+        class="main__expires expires"
+      >
         <div class="expires__row">
           <div class="expires__select-wrap expires__select-wrap--hours">
+            <div class="expires__title web-textlabel-18">Data Expires After</div>
             <multiselect
               id="expires-hours" class="expires__select select" name="expires_at" placeholder="Select one"
               v-model="minutesLimit"
@@ -28,6 +99,7 @@
             </multiselect>
           </div>
           <div class="expires__select-wrap expires__select-wrap--limits">
+            <div class="expires__title web-textlabel-18">Number of attempts</div>
             <multiselect
               id="expires-limits" class="expires__select select" name="limit" placeholder="Select one"
               v-model="queriesLimit"
@@ -41,35 +113,59 @@
           </div>
         </div>
       </div>
-      <div class="main__files">
-        <div v-for="file in files" class="main__file file-load">
-          <span class="file-load__type-icon">{{ file.ext }}</span>
-          <span class="file-load__title">{{ file.name }}</span>
-          <button @click="removeFile(file.id)" type="button" class="file-load__del">Delete</button>
-        </div>
-        <div v-for="file in errorFiles" class="file-load__load file-load__load--error">
-          <div class="file-load__load-left">
-            <p class="file-load__load-title">{{ file.name }}</p>
-            <p class="file-load__error">Error: {{ file.error }}</p>
-          </div>
-        </div>
-      </div>
       <div class="main__password">
-        <p class="main__password-text" v-bind:style="{ display: !customPassword ? 'block' : 'none' }">
+        <p class="main__password-text web-18" v-if="!customPassword">
           The password for access will be generated randomly,
-          but <a href="#" class="main__link js-show-password-link" @click.prevent="customPassword = true">you can enter your own</a>.
+          but you can
+          <button
+            :class="{
+              'main__link': true,
+              'main__link_btn': true,
+              'main__link_btn_paranoid': isParanoiaOn,
+              'js-show-password-link': true,
+              'web-18': true
+            }"
+            @click.prevent="customPassword = true">create your own</button>.
         </p>
-        <div class="main__password-wrap" v-bind:style="{ display: customPassword ? 'block' : 'none' }">
-          <label for="passphrase" class="main__password-title subtitle">Password</label>
+        <div class="main__password-wrap" v-if="customPassword">
+          <label for="passphrase" class="main__password-title subtitle web-textlabel-18">Password</label>
           <input v-model="password" type="password" class="main__password-input" id="passphrase" name="passphrase"
-                 placeholder="This will be required to decrypt the text">
+                 placeholder="Hoc Voluerunt">
           <p class="main__password-note">
             You can leave this field empty and the password will be generated
             randomly
           </p>
         </div>
       </div>
-      <button type="submit" class="main__btn btn">Create Private Encrypted Link</button>
+      <button
+        type="submit"
+        :class="{
+            'main__btn': true,
+            'btn': true,
+            'btn_paranoid': isParanoiaOn
+        }"
+      >
+        Create Private Encryption
+      </button>
+      <div class="main__link-wrap">
+        <span
+          :class="{
+            'main__or': true,
+            'main__or_paranoid': isParanoiaOn
+          }"
+        >
+          or
+        </span>
+        <router-link
+          to="/decrypt"
+          :class="{
+            'main__link': true,
+            'main__link_crypt': true,
+            'main__link_crypt_paranoid': isParanoiaOn,
+        }">
+          Decrypt
+        </router-link>
+      </div>
     </form>
   </div>
 </template>
@@ -81,12 +177,10 @@
 
   import Multiselect from 'vue-multiselect'
   import 'vue-multiselect/dist/vue-multiselect.min.css'
+  import 'assets/css/multiselect.css'
 
   export default {
-    components: {
-      File,
-      Multiselect,
-    },
+    props: ['formSubmitted'],
     data: () => ({
       'options': {
         'minutesLimit': [
@@ -95,17 +189,18 @@
             'value': 10,
           },
           {
+            'name': '1 hour',
+            'value': 2160,
+          },
+          {
             'name': '12 hours',
             'value': 720,
           },
           {
             'name': '24 hours',
             'value': 1440,
-          },
-          {
-            'name': '1 hour',
-            'value': 2160,
-          }],
+          }
+        ],
         'queriesLimit': [
           {
             'name': 'No limit',
@@ -133,11 +228,19 @@
         'name': 'No limit',
         'value': 0,
       },
-      'password': 'nopassword',
+      'password': '',
       'files': {},
       'errorFiles': {},
       'customPassword': false,
     }),
+    computed: {
+      isParanoiaOn () {
+        return this.$store.state.privateMode
+      },
+      hasFiles () {
+        return Object.keys(this.files).length || Object.keys(this.errorFiles).length
+      }
+    },
     methods: {
       onFileChange: function (e) {
         let files = e.target.files || e.dataTransfer.files
@@ -148,13 +251,14 @@
         Object.assign(this.$data, this.$options.data.call(this))
       },
       onFormSubmit: function (e) {
-        this.postMessage({
+        let postData = {
           'secretMessage': this.$data['secretMessage'],
           'password': this.$data['password'] || generatePassword(),
           'files': this.$data['files'],
           'minutesLimit': this.$data['minutesLimit'],
           'queriesLimit': this.$data['queriesLimit'],
-        })
+        }
+        this.postMessage(postData)
         this.reset()
       },
       postMessage: function (data) {
@@ -192,5 +296,9 @@
         Vue.delete(this.files, id)
       },
     },
+    components: {
+      File,
+      Multiselect,
+    }
   }
 </script>

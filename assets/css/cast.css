@@ -7,8 +7,15 @@
   line-height: 18px;
 
   &__app {
+    color: #b3b3b3;
+    color: var(--grey);
     text-decoration: underline;
     cursor: pointer;
+
+    &:visited {
+      color: #b3b3b3;
+      color: var(--grey);
+    }
   }
 
   &__com {

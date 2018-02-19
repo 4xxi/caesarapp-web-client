@@ -27,9 +27,9 @@
 
 <script>
   import Logo from '~/components/newcomponents/Logo.vue'
-  import ModeTrigger from '~/components/newcomponents/ModeTrigger.vue'
-  import DecryptForm from '~/components/newcomponents/DecryptForm.vue'
-  import PageFooter from '~/components/newcomponents/PageFooter.vue'
+  import ModeTrigger from '~/components/ModeTrigger.vue'
+  import DecryptForm from '~/components/DecryptForm.vue'
+  import PageFooter from '~/components/PageFooter.vue'
 
   export default {
     components: {

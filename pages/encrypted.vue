@@ -40,12 +40,12 @@
 </template>
 
 <script>
-  import Logo from '~/components/newcomponents/LogoAve.vue'
-  import ModeTrigger from '~/components/newcomponents/ModeTrigger.vue'
-  import EncryptResult from '~/components/newcomponents/EncryptResult.vue'
-  import EncryptResultParanoid from '~/components/newcomponents/EncryptResultParanoid.vue'
-  import PageFooter from '~/components/newcomponents/PageFooter.vue'
-  import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
+  import Logo from '~/components/LogoAve.vue'
+  import ModeTrigger from '~/components/ModeTrigger.vue'
+  import EncryptResult from '~/components/EncryptResult.vue'
+  import EncryptResultParanoid from '~/components/EncryptResultParanoid.vue'
+  import PageFooter from '~/components/PageFooter.vue'
+  import GitHubCat from '~/components/GitHubCat.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'

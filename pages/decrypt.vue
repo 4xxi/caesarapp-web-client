@@ -40,10 +40,10 @@
 </template>
 
 <script>
-  import Logo from '~/components/newcomponents/Logo.vue'
-  import DecryptForm from '~/components/newcomponents/DecryptForm.vue'
-  import PageFooter from '~/components/newcomponents/PageFooter.vue'
-  import GitHubCat from '~/components/newcomponents/GitHubCat.vue'
+  import Logo from '~/components/Logo.vue'
+  import DecryptForm from '~/components/DecryptForm.vue'
+  import PageFooter from '~/components/PageFooter.vue'
+  import GitHubCat from '~/components/GitHubCat.vue'
 
   import sjcl from 'sjcl'
   import action from '../utils/action'
@@ -63,7 +63,7 @@
     created () {
       this.$store.subscribe((mutation, state) => {
         if (mutation.type === action.DECRYPTED) {
-          this.$router.push('/newdesign/messages/paranoid')
+          this.$router.push('/messages/paranoid')
         }
       })
     },

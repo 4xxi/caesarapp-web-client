@@ -25,9 +25,9 @@
 </template>
 
 <script>
-  import LogoBigParanoid from '~/components/newcomponents/LogoBigParanoid.vue'
+  import LogoBigParanoid from '~/components/LogoBigParanoid.vue'
   import EncryptResultParanoidCopied from '~/components/newcomponents/EncryptResultParanoidCopied.vue'
-  import PageFooter from '~/components/newcomponents/PageFooter.vue'
+  import PageFooter from '~/components/PageFooter.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'

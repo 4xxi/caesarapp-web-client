@@ -173,7 +173,7 @@
 <script>
   import Vue from 'vue'
   import generatePassword from 'password-generator'
-  import File from '~/components/newcomponents/File.vue'
+  import File from '~/components/File.vue'
 
   import Multiselect from 'vue-multiselect'
   import 'vue-multiselect/dist/vue-multiselect.min.css'

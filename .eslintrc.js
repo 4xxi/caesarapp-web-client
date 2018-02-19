@@ -12,7 +12,8 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    'comma-dangle': [0]
+    'comma-dangle': [0],
+    'import/no-webpack-loader-syntax': 'off'
   },
   globals: {},
 }

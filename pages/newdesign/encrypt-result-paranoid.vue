@@ -28,8 +28,8 @@
 <script>
   import LogoParanoid from '~/components/newcomponents/LogoParanoid.vue'
   import ModeTriggerParanoid from '~/components/newcomponents/ModeTriggerParanoid.vue'
-  import EncryptResultParanoid from '~/components/newcomponents/EncryptResultParanoid.vue'
-  import PageFooter from '~/components/newcomponents/PageFooter.vue'
+  import EncryptResultParanoid from '~/components/EncryptResultParanoid.vue'
+  import PageFooter from '~/components/PageFooter.vue'
 
   import sjcl from 'sjcl'
   import axios from 'axios'
