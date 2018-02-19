@@ -20,11 +20,11 @@ Password: {{$store.state.encryptedResult.password}}
 Securely created with {{baseUrl}}
     </textarea>
     <div class="main__inner">
-      <div class="main__row-btn_wrap">
+      <div>
         <div class="main__row-btn">
           <button
             @click.prevent="handlerForCopyBtns('link_message', $event)"
-            class="main__btn_mb btn btn_paranoid"
+            class="main__btn main__btn_mb btn btn_paranoid"
           >
             Copy URL & Password
           </button>
@@ -61,20 +61,20 @@ Securely created with {{baseUrl}}
     >{{$store.state.encryptedResult.data}}
     </textarea>
     <div class="main__inner">
+      <div>
+        <button
+          @click.prevent="handlerForCopyBtns('data_message', $event)"
+          class="main__btn main__btn btn btn_paranoid"
+        >
+          Copy Encrypted Text
+        </button>
+      </div>
       <nuxt-link
         to="/"
         class="main__link main__link_crypt main__link_crypt_grey"
       >
         Create New Encryption
       </nuxt-link>
-      <div class="main__row-btn_wrap">
-        <button
-          @click.prevent="handlerForCopyBtns('data_message', $event)"
-          class="btn btn_paranoid"
-        >
-          Copy Encrypted Text
-        </button>
-      </div>
       <div
         v-if="isReminderUrlOn"
         class="reminder reminder_enc"

@@ -3,11 +3,11 @@
   right: -180px;
 
   &_url {
-    bottom: 0;
+    top: -80px;
   }
 
   &_enc {
-    top: 0;
+    top: -90px;
   }
 
   &__arrow {
