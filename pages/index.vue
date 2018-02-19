@@ -86,14 +86,9 @@
     mounted () {
       instance = worker()
     },
-    /* created () {
-      this.$store.subscribe((mutation, state) => {
-        if (mutation.type === action.CREATED_MESSAGE ||
-        mutation.type === action.REQUEST_COMPLETE) {
-          this.$router.push('/encrypted')
-        }
-      })
-    }, */
+    created () {
+      this.$store.dispatch('REQUEST_IN_PROGRESS', false) // reset preloader
+    },
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode
@@ -125,7 +120,6 @@
               this.$router.push('/encrypted')
             })
           }
-          this.$store.dispatch('REQUEST_IN_PROGRESS', false)
         })
       },
       showModalMessage (id, password) {

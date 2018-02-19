@@ -66,6 +66,7 @@
           this.$router.push('/messages/paranoid')
         }
       })
+      this.$store.dispatch('REQUEST_IN_PROGRESS', false) // reset preloader
     },
     head: {
       title: 'VENI, VIDI, ENCRYPTED',

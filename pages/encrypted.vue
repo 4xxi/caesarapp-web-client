@@ -65,6 +65,7 @@
       if (!('id' in this.$store.state.encryptedResult || 'data' in this.$store.state.encryptedResult)) {
         this.$router.replace('/')
       }
+      this.$store.dispatch('REQUEST_IN_PROGRESS', false) // reset preloader
     },
     head: {
       title: 'VENI, VIDI, ENCRYPTED',
