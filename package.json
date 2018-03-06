@@ -24,7 +24,12 @@
     "postcss": "^6.0.17",
     "postcss-cssnext": "^3.1.0",
     "sjcl": "^1.0.7",
-    "vue-multiselect": "^2.0.8"
+    "vue-multiselect": "^2.0.8",
+    "postcss-loader": "^2.1.0",
+    "postcss-nested": "^3.0.0",
+    "postcss-scss": "^1.0.3",
+    "precss": "^2.0.0",
+    "workerize-loader": "^1.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -35,11 +40,6 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "postcss-loader": "^2.1.0",
-    "postcss-nested": "^2.1.2",
-    "postcss-scss": "^1.0.3",
-    "precss": "^2.0.0",
-    "workerize-loader": "^1.0.1"
+    "eslint-plugin-standard": "^3.0.1"
   }
 }
