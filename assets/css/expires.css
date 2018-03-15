@@ -1,0 +1,42 @@
+.expires {
+  &__row {
+    width: 580px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__select-wrap {
+    width: 280px;
+  }
+
+  &__title {
+    margin-bottom: 15px;
+  }
+
+  @media (width < 900px) and (width >= 680px) {
+
+    &__row {
+      width: 100%;
+    }
+
+    &__select-wrap {
+      width: 48%;
+    }
+  }
+
+  @media (width < 680px) {
+
+    &__row {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    &__select-wrap {
+      width: 100%;
+
+      &:first-child {
+        margin-bottom: 40px;
+      }
+    }
+  }
+}

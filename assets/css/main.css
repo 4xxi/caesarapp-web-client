@@ -1,0 +1,236 @@
+.main {
+  max-width: 800px;
+  background-color: #ffffff;
+  background-color: var(--white);
+  border-radius: 4px;
+  padding: 33px 40px 40px;
+
+  &__expires {
+    margin-bottom: 32px;
+  }
+
+  &__password {
+    width: 580px;
+    margin-bottom: 36px;
+
+    &_decrypt {
+      width: 720px;
+    }
+
+    &-title {
+      margin-bottom: 20px;
+    }
+
+    &-input {
+      width: 100%;
+      height: 50px;
+      padding-left: 20px;
+
+      border: 1px solid #e6e6e6;
+      border: 1px solid var(--frames);
+
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+      background-color: #ffffff;
+      background-color: var(--white);
+      font-size: 18px;
+      color: #005ee0;
+      color: var(--blue);
+      outline: none;
+
+      &:focus {
+        border:1px solid var(--hover);
+
+        outline: none !important;
+        color: #005ee0;
+        color: var(--blue);
+      }
+
+      &::-webkit-input-placeholder {
+        font-family: Rubik, sans-serif;
+        font-size: 18px;
+        letter-spacing: 0.4px;
+        color: #d9d9d9;
+        color: var(--placeholder);
+      }
+
+      &::-moz-placeholder {
+        font-family: Rubik, sans-serif;
+        font-size: 18px;
+        letter-spacing: 0.4px;
+        color: #d9d9d9;
+        color: var(--placeholder);
+      }
+
+      &:-ms-input-placeholder {
+        font-family: Rubik, sans-serif;
+        font-size: 18px;
+        letter-spacing: 0.4px;
+        color: #d9d9d9;
+        color: var(--placeholder);
+      }
+
+      &:-moz-placeholder {
+        font-family: Rubik, sans-serif;
+        font-size: 18px;
+        letter-spacing: 0.4px;
+        color: #d9d9d9;
+        color: var(--placeholder);
+      }
+
+      &_paranoid {
+        &:focus {
+          border: 1px solid var(--hover-paranoid);
+        }
+      }
+    }
+
+    &-note {
+      font-size: 14px;
+      letter-spacing: 0.6px;
+      color: #b3b3b3;
+      color: var(--grey);
+    }
+  }
+
+  &__link-wrap {
+    display: inline-block;
+  }
+
+  &__or {
+    color: #005ee0;
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+
+    &_paranoid {
+      color: #343942;
+      color: var(--dark-grey);
+    }
+  }
+
+  &__link {
+    padding: 0;
+    border: none;
+
+    background: none;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: .2s linear;
+
+    &_btn {
+      border-bottom: 1px dashed #343942;
+
+      &:hover {
+        border-bottom: 1px dashed #0092fa;
+
+        color: #0092fa;
+      }
+
+      &_paranoid {
+
+        &:hover {
+          border-bottom: 1px dashed #717B8F;
+
+          color: #717B8F;
+        }
+      }
+    }
+
+    &_crypt {
+      border: none;
+
+      background: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      color: #005ee0;
+      color: var(--blue);
+      outline: none;
+      transition: .2s linear;
+
+      &:hover {
+        color: #0092fa;
+      }
+
+      &_grey {
+        color: #343942;
+        color: var(--dark-grey);
+
+        &:visited {
+          color: #343942;
+          color: var(--dark-grey);
+        }
+      }
+
+      &_paranoid {
+        color: #343942;
+        color: var(--dark-grey);
+        border-bottom: 1px solid #343942;
+
+        &:focus,
+        &:hover,
+        &:active {
+          color: #717B8F;
+          border-bottom: 1px solid #717B8F;
+        }
+      }
+    }
+  }
+
+  &__row-btn {
+    margin-bottom: 30px;
+  }
+
+  &__btn {
+    margin-right: 40px;
+
+    &_mrl {
+      margin-right: 20px;
+    }
+  }
+
+  &__files {
+    margin-bottom: 30px;
+  }
+
+  &__inner {
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media (width < 900px) {
+
+    &__password {
+      width: 100%;
+    }
+  }
+
+  @media (width < 760px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  @media (width < 680px) {
+
+    &__inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__btn {
+      margin-right: 20px;
+      margin-bottom: 40px;
+    }
+
+    &__link_crypt {
+      display: block;
+    }
+  }
+}

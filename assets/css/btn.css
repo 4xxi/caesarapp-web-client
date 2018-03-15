@@ -1,0 +1,57 @@
+.btn {
+  padding: 14px 20px;
+
+  border: none;
+
+  background-color: #005de1;
+  background-color: var(--blue);
+  border-radius: 4px;
+  box-shadow: 0 8px 12px 0 rgba(0, 94, 224, 0.15);
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  transition: .2s linear;
+  vertical-align: middle;
+
+  &:focus,
+  &:hover {
+    background: #0092fa;
+    box-shadow: none;
+  }
+
+  &_paranoid {
+    background-color: #343942;
+    background-color: var(--dark-grey);
+    box-shadow: 0 8px 12px 0 rgba(52, 57, 66, 0.15);
+
+    &:focus,
+    &:hover {
+      background: #717B8F;
+      box-shadow: none;
+    }
+  }
+
+  &__green {
+     background-color: #0eae00;
+     box-shadow: 0 8px 12px 0 rgba(14, 173, 0, 0.15);
+  }
+
+  &__green:before{
+    margin-right: 9px;
+
+    width: 16px;
+    height: 12px;
+
+    content: url('~assets/img/icon-check.svg');
+  }
+
+  @media (width < 680px) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}

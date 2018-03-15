@@ -11,8 +11,7 @@
         </p>
       </div>
       <div class="message__body get-pass">
-        <textarea readonly ref="message" class="get-pass__title"
-                  title="Shared text">{{message.secretMessage}}</textarea>
+        <input readonly ref="message" class="get-pass__title" v-bind:value="message.secretMessage" title="Shared text"/>
         <div v-for="file in message.files" class="get-pass__files-list">
           <a @click.prevent="downloadFile(file.id)" v-bind:href="file.body" v-bind:download="file.name"
              class="get-pass__file file">
@@ -34,27 +33,14 @@
             </button>
           </div>
           <div class="actions__right">
-            <a @click.prevent="close" href="#" class="actions__link">Close and go to home</a>
+            <a @click.prevent="close" href="#" class="actions__link">Close and go to vault.4xxi.com</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-<style>
-  textarea.get-pass__title {
-    font-size: 18px;
-    letter-spacing: 0.4px;
-    text-align: left;
-    color: #343942;
-    padding: 0;
-    margin: 0;
-    background: #fff;
-    width: 100%;
-    height: 20px;
-    font-weight: 300;
-  }
-</style>
+
 <script>
   import FileSaver from 'file-saver'
 

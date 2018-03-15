@@ -1,19 +1,7 @@
+# the application container
 FROM node:alpine
-USER node
-WORKDIR /home/node
-
-# Run in production mode
-ENV NODE_ENV=production
-
-
-# Install app dependencies
-COPY package.json .
-COPY yarn.lock .
-
-RUN yarn install
-
-# Bundle app source
-COPY . .
+COPY --from=4xxi/caesarapp-web-client:code /var/www/app /var/www/app
+WORKDIR /var/www/app
 
 # Setup environment variables
 ENV HOST=0.0.0.0
@@ -21,4 +9,4 @@ ENV PORT=4000
 
 EXPOSE 4000
 
-ENTRYPOINT ./entrypoint.sh
+CMD [ "yarn", "run", "prod"]

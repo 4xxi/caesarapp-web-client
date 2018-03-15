@@ -2,8 +2,8 @@ require('dotenv').config()
 
 module.exports = {
   env: {
-    baseApiUrl: '//' + (process.env.SERVER_HOSTNAME + ':' +
-      process.env.SERVER_HTTP_PORT) || 'http://localhost:8080',
+    baseApiUrl: process.env.BASE_API_URL || 'http://localhost:8282',
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
   },
   /*
   ** Headers of the page
@@ -23,14 +23,13 @@ module.exports = {
       },
     ],
     link: [
-      {rel: 'stylesheet', href: '/assets/custom.css'},
+      /* {rel: 'stylesheet', href: '/assets/custom.css'}, */
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
-    ],
-    script: [
-      {src: '/assets/custom.js'},
+      {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Rubik'},
+      {rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Pangolin'}
     ],
   },
-  css: [],
+  css: ['@assets/css/styles.css'],
   /*
   ** Customize the progress-bar color
   */
@@ -44,13 +43,15 @@ module.exports = {
     ** Run ESLINT on save
     */
     extend (config, ctx) {
-      if (ctx.dev && ctx.isClient) {
+      if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
         })
+        const cssLoader = config.module.rules.find((loader) => loader.test.toString() === '/\\.css$/')
+        cssLoader.use.push('postcss-loader')
       }
     },
   },
