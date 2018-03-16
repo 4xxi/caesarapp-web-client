@@ -95,14 +95,15 @@ Securely created with {{baseUrl}}
 </template>
 
 <script>
-  import hostname from '../utils/hostname'
-
   export default {
     data: () => ({
-      baseUrl: hostname,
+      baseUrl: '',
       copyUrlFlag: false,
       copyEncFlag: false
     }),
+    mounted () {
+      this.baseUrl = location.origin
+    },
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode
