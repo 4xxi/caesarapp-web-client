@@ -25,12 +25,13 @@ Securely created with {{baseUrl}}</textarea>
 </template>
 
 <script>
-  import hostname from '../utils/hostname'
-
   export default {
-    data: () => ({
-      baseUrl: hostname,
+    data: (app) => ({
+      baseUrl: '',
     }),
+    mounted () {
+      this.baseUrl = location.origin
+    },
     methods: {
       copy () {
         this.$refs['message'].select()
