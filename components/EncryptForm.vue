@@ -5,6 +5,7 @@
       action="#"
       method="POST"
       class="main__form"
+      autocomplete="off"
     >
       <div class="main__drop-file drop-file">
         <div
@@ -130,7 +131,7 @@
         <div class="main__password-wrap" v-if="customPassword">
           <label for="passphrase" class="main__password-title subtitle web-textlabel-18">Password</label>
           <input v-model="password" type="password" class="main__password-input" id="passphrase" name="passphrase"
-                 placeholder="Hoc Voluerunt">
+                 placeholder="Hoc Voluerunt" autocomplete="new-password">
           <p class="main__password-note">
             You can leave this field empty and the password will be generated
             randomly

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="onFormSubmit" action="#" method="POST" class="main__form">
+    <form @submit.prevent="onFormSubmit" action="#" method="POST" class="main__form" autocomplete="off">
       <div class="main__drop-file drop-file">
         <div class="drop-file__wrap">
           <label for="text" class="drop-file__title subtitle web-textlabel-18 ">Encrypted text</label>
@@ -38,6 +38,7 @@
             id="passphrase"
             name="passphrase"
             placeholder="Hoc Voluerunt"
+            autocomplete="new-password"
           >
           <p class="main__password-note">
             You should have been given this password with the link to this text
