@@ -90,7 +90,7 @@
           'secretMessage': data['secretMessage'],
           'files': data['files'],
         })).toString()
-
+        console.log('test')
         axios.post(process.env.baseApiUrl + `/api/messages`,
           {
             'encryptedMessage': btoa(encryptedMessage),

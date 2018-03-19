@@ -16,12 +16,12 @@ const createStore = () => {
     },
     actions: {
       createMessage ({ commit }, params) {
-        return api.post(process.env.baseApiUrl + `/api/messages`, params)
+        return api.post(`/api/messages`, params)
           .then((response) => commit(action.CREATED_MESSAGE, response.data))
           .catch((error) => commit(action.API_FAILURE, error))
       },
       createParanoidMessage ({ commit }, params) {
-        let promise = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
           try {
             commit(action.CREATED_PARANOID_MESSAGE, params.encryptedMessage)
             resolve()
@@ -29,7 +29,6 @@ const createStore = () => {
             reject(e)
           }
         })
-        return promise
       },
       encryptMessage ({ commit }, data) {
         return new Promise((resolve, reject) => {
@@ -45,7 +44,7 @@ const createStore = () => {
         })
       },
       readMessage ({ commit }, id) {
-        return api.get(process.env.baseApiUrl + `/api/messages/` + id)
+        return api.get(`/api/messages/` + id)
           .then((response) => commit(action.GET_MESSAGE, response))
           .catch((error) => commit(action.API_FAILURE, error))
       },
