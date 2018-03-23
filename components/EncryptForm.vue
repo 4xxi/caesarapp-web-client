@@ -200,6 +200,10 @@
           {
             'name': '24 hours',
             'value': 1440,
+          },
+          {
+            'name': '48 hours',
+            'value': 1440,
           }
         ],
         'queriesLimit': [

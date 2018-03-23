@@ -38,7 +38,7 @@
   import ModeTrigger from '~/components/ModeTrigger.vue'
   import EnterPasswordForm from '~/components/EnterPasswordForm.vue'
   import PageFooter from '~/components/PageFooter.vue'
-  import GoToUrlResParanoid from '~/components/GoToUrlResParanoid.vue'
+  import GoToUrlResParanoid from '~/components/DecryptResultParanoid.vue'
 
   import sjcl from 'sjcl'
 
