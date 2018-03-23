@@ -40,7 +40,7 @@
 <script>
   import LogoBigParanoid from '~/components/LogoBigParanoid.vue'
   import LogoBig from '~/components/LogoBig.vue'
-  import GoToUrlResParanoid from '~/components/GoToUrlResParanoid.vue'
+  import GoToUrlResParanoid from '~/components/DecryptResultParanoid.vue'
   import PageFooter from '~/components/PageFooter.vue'
   import GitHubCat from '~/components/GitHubCat.vue'
 

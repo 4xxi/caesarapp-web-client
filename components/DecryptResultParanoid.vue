@@ -15,9 +15,7 @@
         'textarea_paranoid': isParanoiaOn
       }"
       title="Message"
-    >
-      {{$store.state.message.secretMessage}}
-    </textarea>
+    >{{$store.state.message.secretMessage}}</textarea>
     <div class="get-pass__files-list">
       <div
         v-if="Object.keys($store.state.message.files).length > 0"
