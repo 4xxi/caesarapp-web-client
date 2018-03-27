@@ -47,7 +47,7 @@
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode
-      }
+      },
     },
     methods: {
       onDragenter (e) {
@@ -59,7 +59,7 @@
       onDrop (e) {
         this.$data['isActive'] = false
         let files = e.target.files || e.dataTransfer.files
-        console.log(files)
+        this.handleFile(files)
       },
       onFileChange (e) {
         let files = e.target.files || e.dataTransfer.files

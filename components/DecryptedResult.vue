@@ -15,9 +15,7 @@
         'textarea_paranoid': isParanoiaOn
       }"
       title="Message"
-    >
-      {{$store.state.message.secretMessage}}
-    </textarea>
+    >{{$store.state.message.secretMessage}}</textarea>
     <div class="get-pass__files-list">
       <div
         v-if="Object.keys($store.state.message.files).length > 0"
@@ -86,27 +84,7 @@
 
 <script>
   import FileSaver from 'file-saver'
-  const dataURItoBlob = function (dataURI) {
-    // convert base64 to raw binary data held in a string
-    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-    let byteString = atob(dataURI.split(',')[1])
-
-    // separate out the mime component
-    let mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-    // write the bytes of the string to an ArrayBuffer
-    let ab = new ArrayBuffer(byteString.length)
-
-    // create a view into the buffer
-    let ia = new Uint8Array(ab)
-
-    // set the bytes of the buffer to the correct values
-    for (var i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i)
-    }
-    // write the ArrayBuffer to a blob, and you're done
-    return new Blob([ab], {type: mimeString})
-  }
+  import {dataURItoBlob} from '../utils'
 
   export default {
     computed: {
@@ -125,7 +103,6 @@
         event.target.innerText = 'Copied'
       },
       downloadFile (id) {
-        console.log(id)
         let file = this.$store.state.message.files[id]
         FileSaver.saveAs(dataURItoBlob(file.body), file.name)
       },
