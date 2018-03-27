@@ -97,14 +97,13 @@ Securely created with {{baseUrl}}
 <script>
   export default {
     data: () => ({
-      baseUrl: '',
       copyUrlFlag: false,
       copyEncFlag: false
     }),
-    mounted () {
-      this.baseUrl = location.origin
-    },
     computed: {
+      baseUrl () {
+        return this.$env.BASE_URL
+      },
       isParanoiaOn () {
         return this.$store.state.privateMode
       },

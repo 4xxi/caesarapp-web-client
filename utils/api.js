@@ -1,9 +1,7 @@
 import axios from 'axios'
 
 export default {
-  instance: axios.create({
-    baseURL: process.env.BASE_API_URL,
-  }),
+  instance: axios.create(),
   get (url, request) {
     return this.instance.get(url, request)
       .then((response) => Promise.resolve(response.data))

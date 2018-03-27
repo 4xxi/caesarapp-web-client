@@ -26,11 +26,10 @@ Securely created with {{baseUrl}}</textarea>
 
 <script>
   export default {
-    data: (app) => ({
-      baseUrl: '',
-    }),
-    mounted () {
-      this.baseUrl = location.origin
+    computed: {
+      baseUrl () {
+        return this.$env.BASE_URL
+      }
     },
     methods: {
       copy () {
