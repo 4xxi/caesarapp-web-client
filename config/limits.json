@@ -1,0 +1,43 @@
+{
+  "minutesLimit": [
+    {
+      "name": "10 minutes",
+      "value": 10
+    },
+    {
+      "name": "1 hour",
+      "value": 2160
+    },
+    {
+      "name": "12 hours",
+      "value": 720
+    },
+    {
+      "name": "24 hours",
+      "value": 1440
+    },
+    {
+      "name": "48 hours",
+      "value": 2880
+    }
+  ],
+  "queriesLimit": [
+    {
+      "name": "No limit",
+      "value": 0
+    },
+    {
+      "name": "1 time",
+      "value": 1
+    },
+    {
+      "name": "10 times",
+      "value": 10
+    },
+    {
+      "name": "50 times",
+      "value": 50
+    }
+  ]
+
+}
