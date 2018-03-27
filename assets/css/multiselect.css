@@ -1,5 +1,6 @@
 .multiselect {
   min-height: 50px;
+  cursor: pointer;
 
   &__tags {
     -webkit-border-radius: 2px;

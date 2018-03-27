@@ -38,7 +38,7 @@
   import ModeTrigger from '~/components/ModeTrigger.vue'
   import EnterPasswordForm from '~/components/EnterPasswordForm.vue'
   import PageFooter from '~/components/PageFooter.vue'
-  import GoToUrlResParanoid from '~/components/GoToUrlResParanoid.vue'
+  import GoToUrlResParanoid from '~/components/DecryptedResult.vue'
 
   import sjcl from 'sjcl'
 
@@ -87,27 +87,6 @@
         }
         return false
       },
-      /* onFormSubmit (data) {
-        this.progress = true
-        this.showMessage = true
-        let encryptedMessage = sjcl.encrypt(data['password'], JSON.stringify({
-          'secretMessage': data['secretMessage'],
-          'files': data['files'],
-        })).toString()
-
-        axios.post(process.env.baseApiUrl + `/api/messages`,
-          {
-            'encryptedMessage': btoa(encryptedMessage)
-          },
-        ).then(response => {
-          this.progress = false
-          this.showModalMessage(response.data.id, data['password'])
-        }).catch(e => {
-          console.log(e)
-          this.progress = false
-          this.showMessage = false
-        })
-      }, */
       showModalMessage (id, password) {
         let props = this.$router.resolve({
           name: 'messages-id',

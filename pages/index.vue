@@ -21,12 +21,12 @@
         'paranoid': isParanoiaOn
       }"
     >
-      <GitHubCat />
+      <GitHubCat :paranoid="isParanoiaOn" />
       <div class="container">
         <div class="container__inner">
           <header>
             <div class="header page__header">
-              <Logo></Logo>
+              <Logo :paranoid="isParanoiaOn"></Logo>
               <ModeTrigger
                 :paranoiaMode="isParanoiaOn"
               ></ModeTrigger>

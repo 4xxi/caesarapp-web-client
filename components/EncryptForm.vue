@@ -96,7 +96,7 @@
               :allow-empty="false"
               :close-on-select="true"
               :show-labels="false"
-              :options="options.minutesLimit">
+              :options="limits.minutesLimit">
             </multiselect>
           </div>
           <div class="expires__select-wrap expires__select-wrap--limits">
@@ -109,7 +109,7 @@
               :allow-empty="false"
               :close-on-select="true"
               :show-labels="false"
-              :options="options.queriesLimit">
+              :options="limits.queriesLimit">
             </multiselect>
           </div>
         </div>
@@ -126,11 +126,13 @@
               'js-show-password-link': true,
               'web-18': true
             }"
-            @click.prevent="customPassword = true">create your own</button>.
+            @click.prevent="setPassword">create your own</button>.
         </p>
         <div class="main__password-wrap" v-if="customPassword">
           <label for="passphrase" class="main__password-title subtitle web-textlabel-18">Password</label>
-          <input v-model="password" type="password" class="main__password-input" id="passphrase" name="passphrase"
+          <input autofocus ref="password" v-model="password" type="password" class="main__password-input" :class="{
+                      'main__password-input_paranoid': isParanoiaOn
+                    }" id="passphrase" name="passphrase"
                  placeholder="Hoc Voluerunt" autocomplete="new-password">
           <p class="main__password-note">
             You can leave this field empty and the password will be generated
@@ -179,47 +181,11 @@
   import Multiselect from 'vue-multiselect'
   import 'vue-multiselect/dist/vue-multiselect.min.css'
   import 'assets/css/multiselect.css'
+  import { mapState } from 'vuex'
 
   export default {
     props: ['formSubmitted'],
     data: () => ({
-      'options': {
-        'minutesLimit': [
-          {
-            'name': '10 minutes',
-            'value': 10,
-          },
-          {
-            'name': '1 hour',
-            'value': 2160,
-          },
-          {
-            'name': '12 hours',
-            'value': 720,
-          },
-          {
-            'name': '24 hours',
-            'value': 1440,
-          }
-        ],
-        'queriesLimit': [
-          {
-            'name': 'No limit',
-            'value': 0,
-          },
-          {
-            'name': '1 time',
-            'value': 1,
-          },
-          {
-            'name': '10 times',
-            'value': 10,
-          },
-          {
-            'name': '50 times',
-            'value': 50,
-          }],
-      },
       'secretMessage': '',
       'minutesLimit': {
         'name': '10 minutes',
@@ -240,9 +206,15 @@
       },
       hasFiles () {
         return Object.keys(this.files).length || Object.keys(this.errorFiles).length
-      }
+      },
+      ...mapState({
+        limits: state => state.limits
+      })
     },
     methods: {
+      setPassword (e) {
+        this.customPassword = true
+      },
       onFileChange: function (e) {
         let files = e.target.files || e.dataTransfer.files
         this.handleFile(files)
