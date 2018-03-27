@@ -283,7 +283,6 @@
         reader.onload = function (readerEvt) {
           userFile['body'] = readerEvt.target.result
           Vue.set(files, userFile.id, userFile)
-          console.log(files)
         }
         reader.readAsDataURL(file)
       },

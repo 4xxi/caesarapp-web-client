@@ -39,7 +39,7 @@ RUN yarn run build --universal
 FROM base AS release
 # copy production node_modules
 COPY --from=dependencies /var/app/prod_node_modules ./node_modules
-COPY --from=build /var/app/.nuxt ./.nuxt
+COPY --from=build /var/app ./
 # copy app sources
 COPY . .
 # Setup environment variables

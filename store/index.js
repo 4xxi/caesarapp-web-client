@@ -16,7 +16,7 @@ const createStore = () => {
     },
     actions: {
       createMessage ({ commit }, params) {
-        return api.post(`/api/messages`, params)
+        return api.post(this.$env.BASE_API_URL + `/api/messages`, params)
           .then((response) => commit(action.CREATED_MESSAGE, response.data))
           .catch((error) => commit(action.API_FAILURE, error))
       },
@@ -44,7 +44,7 @@ const createStore = () => {
         })
       },
       readMessage ({ commit }, id) {
-        return api.get(`/api/messages/` + id)
+        return api.get(this.$env.BASE_API_URL + `/api/messages/` + id)
           .then((response) => commit(action.GET_MESSAGE, response))
           .catch((error) => commit(action.API_FAILURE, error))
       },
