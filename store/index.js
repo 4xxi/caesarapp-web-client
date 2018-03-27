@@ -1,11 +1,12 @@
 import Vuex from 'vuex'
+import limits from '../config/limits'
 import api from '../utils/api.js'
 import action from '../utils/action.js'
-import sjcl from 'sjcl'
 
 const createStore = () => {
   return new Vuex.Store({
     state: {
+      limits: limits,
       privateMode: false,
       requestFailed: false,
       throwFiles: false,
@@ -28,19 +29,6 @@ const createStore = () => {
           } catch (e) {
             reject(e)
           }
-        })
-      },
-      encryptMessage ({ commit }, data) {
-        return new Promise((resolve, reject) => {
-          let encryptedMessage = {
-            'encryptedMessage': btoa(sjcl.encrypt(data['password'], JSON.stringify({
-              'secretMessage': data['secretMessage'],
-              'files': data['files'],
-            })).toString()),
-            'minutesLimit': data['minutesLimit']['value'],
-            'queriesLimit': data['queriesLimit']['value'],
-          }
-          resolve(encryptedMessage)
         })
       },
       readMessage ({ commit }, id) {

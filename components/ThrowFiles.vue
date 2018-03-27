@@ -13,14 +13,12 @@
         let counter = 0
         document.addEventListener('dragenter', function dragEnter (e) {
           if (e.target === document && !counter) {
-            console.log('dragEnter')
           }
           counter++
         }, false)
         document.addEventListener('dragleave', function dragLeave (e) {
           counter--
           if (e.target === document && !counter) {
-            console.log('dragleave')
           }
         }, false)
       }

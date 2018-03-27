@@ -3,21 +3,21 @@
     :class="{
       'page': true,
       'page_pattern': true,
-      'page_pattern_paranoid': isParanoiaOn
+      'page_pattern_paranoid': true
     }"
   >
     <div
       :class="{
         'page__wrapper': true,
-        'paranoid': isParanoiaOn
+        'paranoid': true
       }"
     >
-      <GitHubCat />
+      <GitHubCat :paranoid="true" />
       <div class="container">
         <div class="container__inner">
           <header>
             <div class="header page__header">
-              <Logo />
+              <Logo :paranoid="true"/>
             </div>
           </header>
           <main>

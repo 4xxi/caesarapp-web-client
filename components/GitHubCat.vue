@@ -29,6 +29,7 @@
 
 <script>
   export default {
+    props: ['paranoid'],
     name: 'GitHubCat',
     data () {
       return {
@@ -55,7 +56,7 @@
         return this.isParanoiaOn ? this.gitHubCatStylePrivate : this.gitHubCatStyleNormal
       },
       isParanoiaOn () {
-        return this.$store.state.privateMode
+        return this.paranoid
       }
     }
   }
