@@ -19,8 +19,7 @@
               }"
               placeholder="Paste text here"
               name="message"
-            >
-            </textarea>
+            > </textarea>
           </div>
         </div>
       </div>

@@ -31,6 +31,15 @@ COPY . .
 ENV HOST=0.0.0.0
 ENV PORT=4000
 ENV CLIENT_HTTP_PORT=4000
+ENV SERVER_HTTP_PORT=8080
+ENV SERVER_HOSTNAME=caesarapp.4xxi.com
+
+ENV CLIENT_HTTP_PORT=3000
+ENV CLIENT_HOSTNAME=caesarapp.4xxi.com
+
+
+ENV BASE_URL=https://caesarapp.4xxi.com
+ENV BASE_API_URL=https://caesarapp.4xxi.com
 
 RUN yarn run build --universal
 
