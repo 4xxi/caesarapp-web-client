@@ -6,7 +6,7 @@
     <div class="footer__cast cast">
       <nuxt-link to="/"  class="cast__app">About CaesarApp</nuxt-link>.
       <div class="cast__com">
-        <span class="cast__team">Enjoy! Build by <a class="cast__com cast__com_link" href="https://4xxi.com/">4xxi</a> team.</span> From Saint Petersburg with <div class="heart"></div>
+        <span class="cast__team">Enjoy! Built by <a class="cast__com cast__com_link" href="https://4xxi.com/">4xxi</a> team.</span> From Saint Petersburg with <div class="heart"></div>
       </div>
     </div>
   </div>

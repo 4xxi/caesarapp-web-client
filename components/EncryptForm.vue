@@ -100,7 +100,7 @@
             </multiselect>
           </div>
           <div class="expires__select-wrap expires__select-wrap--limits">
-            <div class="expires__title web-textlabel-18">Number of attempts</div>
+            <div class="expires__title web-textlabel-18">Number of Attempts</div>
             <multiselect
               id="expires-limits" class="expires__select select" name="limit" placeholder="Select one"
               v-model="queriesLimit"
