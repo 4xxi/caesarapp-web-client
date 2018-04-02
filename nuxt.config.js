@@ -5,6 +5,7 @@ module.exports = {
     BASE_API_URL: process.env.BASE_API_URL || 'http://localhost:8282',
     BASE_URL: process.env.BASE_URL || 'http://localhost:3000',
   },
+  modules: ['~/modules/env'],
   /*
   ** Headers of the page
   */

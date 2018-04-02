@@ -1,11 +1,12 @@
 import Vuex from 'vuex'
+import limits from '../config/limits'
 import api from '../utils/api.js'
 import action from '../utils/action.js'
-import sjcl from 'sjcl'
 
 const createStore = () => {
   return new Vuex.Store({
     state: {
+      limits: limits,
       privateMode: false,
       requestFailed: false,
       throwFiles: false,
@@ -16,7 +17,7 @@ const createStore = () => {
     },
     actions: {
       createMessage ({ commit }, params) {
-        return api.post(`/api/messages`, params)
+        return api.post(this.$env.BASE_API_URL + `/api/messages`, params)
           .then((response) => commit(action.CREATED_MESSAGE, response.data))
           .catch((error) => commit(action.API_FAILURE, error))
       },
@@ -30,21 +31,8 @@ const createStore = () => {
           }
         })
       },
-      encryptMessage ({ commit }, data) {
-        return new Promise((resolve, reject) => {
-          let encryptedMessage = {
-            'encryptedMessage': btoa(sjcl.encrypt(data['password'], JSON.stringify({
-              'secretMessage': data['secretMessage'],
-              'files': data['files'],
-            })).toString()),
-            'minutesLimit': data['minutesLimit']['value'],
-            'queriesLimit': data['queriesLimit']['value'],
-          }
-          resolve(encryptedMessage)
-        })
-      },
       readMessage ({ commit }, id) {
-        return api.get(`/api/messages/` + id)
+        return api.get(this.$env.BASE_API_URL + `/api/messages/` + id)
           .then((response) => commit(action.GET_MESSAGE, response))
           .catch((error) => commit(action.API_FAILURE, error))
       },

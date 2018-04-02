@@ -3,13 +3,13 @@
     :class="{
       'page': true,
       'page_pattern': true,
-      'page_pattern_paranoid': isParanoiaOn
+      'page_pattern_paranoid': true
     }"
   >
     <div
       :class="{
         'page__wrapper': true,
-        'paranoid': isParanoiaOn
+        'paranoid': true
      }"
     >
       <GitHubCat />
@@ -17,14 +17,13 @@
         <div class="container__inner">
           <header>
             <div class="header page__header">
-              <LogoBigParanoid v-if="isParanoiaOn" />
-              <LogoBig v-else />
+              <LogoBigParanoid/>
             </div>
           </header>
           <main>
             <div class="main page__main">
               <div class="main_wrapper">
-                <GoToUrlResParanoid @form-submitted="onFormSubmit"></GoToUrlResParanoid>
+                <DecryptedResult @form-submitted="onFormSubmit"></DecryptedResult>
               </div>
             </div>
           </main>
@@ -39,8 +38,7 @@
 
 <script>
   import LogoBigParanoid from '~/components/LogoBigParanoid.vue'
-  import LogoBig from '~/components/LogoBig.vue'
-  import GoToUrlResParanoid from '~/components/DecryptResultParanoid.vue'
+  import DecryptedResult from '~/components/DecryptedResult.vue'
   import PageFooter from '~/components/PageFooter.vue'
   import GitHubCat from '~/components/GitHubCat.vue'
 
@@ -50,8 +48,7 @@
   export default {
     components: {
       LogoBigParanoid,
-      LogoBig,
-      GoToUrlResParanoid,
+      DecryptedResult: DecryptedResult,
       PageFooter,
       GitHubCat
     },
