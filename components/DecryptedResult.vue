@@ -8,6 +8,7 @@
     </div>
     <textarea
       ref="message"
+      v-model="$store.state.message.secretMessage"
       :class="{
         'encrypt-result__textarea': true,
         'textarea': true,
@@ -15,11 +16,12 @@
         'textarea_paranoid': isParanoiaOn
       }"
       title="Message"
-    >{{$store.state.message.secretMessage}}</textarea>
+    ></textarea>
     <div class="get-pass__files-list">
       <div
         v-if="Object.keys($store.state.message.files).length > 0"
         v-for="file in $store.state.message.files"
+        v-bind:key="file.id"
       >
         <a
           @click.prevent="downloadFile(file.id)"
@@ -84,6 +86,7 @@
 
 <script>
   import FileSaver from 'file-saver'
+  import JSZip from 'jszip'
   import {dataURItoBlob} from '../utils'
 
   export default {
@@ -103,11 +106,23 @@
         event.target.innerText = 'Copied'
       },
       downloadFile (id) {
-        let file = this.$store.state.message.files[id]
-        FileSaver.saveAs(dataURItoBlob(file.body), file.name)
+        return new Promise((resolve, reject) => {
+          try {
+            let file = this.$store.state.message.files[id]
+            resolve(FileSaver.saveAs(dataURItoBlob(file.body), file.name))
+          } catch (error) {
+            reject(error)
+          }
+        })
       },
       downloadAll () {
-        Object.keys(this.$store.state.message.files).forEach(id => this.downloadFile(id))
+        let zip = new JSZip()
+        zip.file('message.txt', this.$store.state.message.secretMessage)
+        Object.keys(this.$store.getters.files).forEach((id) => {
+          let file = this.$store.getters.files[id]
+          zip.file(file.name, file.body.split('base64,')[1], {base64: true})
+        })
+        zip.generateAsync({type: 'blob'}).then(c => FileSaver.saveAs(c, 'secret-message_' + Date.now() + '.zip'))
       },
     },
   }

@@ -5,3 +5,11 @@ export function encrypt (data) {
     'files': data['files'],
   })).toString())
 }
+
+export async function decrypt (password, encryptedData) {
+  try {
+    return await JSON.parse(sjcl.decrypt(password, atob(encryptedData)))
+  } catch (e) {
+    return e.toString()
+  }
+}

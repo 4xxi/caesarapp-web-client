@@ -18,6 +18,7 @@
             Type Password
           </label>
           <input
+            required=trye
             v-model="password"
             type="password"
             class="main__password-input"
@@ -26,9 +27,16 @@
             placeholder="Hoc Voluerunt"
           >
           <p
+            v-if="!errorMessage"
             class="main__password-note"
           >
             You should have been given this password with the link to this text
+          </p>
+          <p
+            v-if="errorMessage"
+            class="main__password-error"
+          >
+            {{errorMessage}}
           </p>
         </div>
       </div>
@@ -50,9 +58,12 @@
 
 <script>
   export default {
+    props: ['errorMessage'],
     data: () => ({
       password: ''
     }),
+    created: () => {
+    },
     methods: {
       onFormSubmit: function (e) {
         let formData = {

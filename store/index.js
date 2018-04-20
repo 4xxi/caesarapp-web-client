@@ -15,6 +15,11 @@ const createStore = () => {
       encryptedResult: {},
       message: {}
     },
+    getters: {
+      files: (state, getters) => {
+        return state.message.files || {}
+      }
+    },
     actions: {
       createMessage ({ commit }, params) {
         return api.post(this.$env.BASE_API_URL + `/api/messages`, params)
@@ -32,9 +37,16 @@ const createStore = () => {
         })
       },
       readMessage ({ commit }, id) {
-        return api.get(this.$env.BASE_API_URL + `/api/messages/` + id)
-          .then((response) => commit(action.GET_MESSAGE, response))
-          .catch((error) => commit(action.API_FAILURE, error))
+        return new Promise((resolve, reject) => {
+          api.get(this.$env.BASE_API_URL + `/api/messages/` + id)
+            .then((response) => {
+              commit(action.GET_MESSAGE, response)
+              resolve(response)
+            })
+            .catch((error) => {
+              reject(error)
+            })
+        })
       },
       applyPassword ({ commit }, password) {
         commit(action.APPLY_PASSWORD, password)
@@ -67,6 +79,10 @@ const createStore = () => {
       APPLY_PASSWORD (state, password) {
         state.encryptedResult.password = password
       },
+      ERROR_NOT_FOUND (state) {
+        state.requestFailed = true
+        state.requestInProgress = false
+      },
       API_FAILURE (state) {
         state.requestFailed = true
         state.requestInProgress = false
@@ -86,6 +102,7 @@ const createStore = () => {
         }
       },
       GET_MESSAGE (state, data) {
+        console.log(data)
         state.requestFailed = false
         state.requestInProgress = false
         state.message = data

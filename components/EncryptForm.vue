@@ -193,7 +193,7 @@
       },
       'queriesLimit': {
         'name': 'No limit',
-        'value': 0,
+        'value': -1,
       },
       'password': '',
       'files': {},
