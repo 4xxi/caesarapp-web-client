@@ -13,3 +13,20 @@ export async function decrypt (password, encryptedData) {
     return e.toString()
   }
 }
+
+export async function readFile (file) {
+  return new Promise((resolve, reject) => {
+    let userFile = {
+      id: new Date().getTime(),
+      ext: file.name.split('.').pop(),
+      name: file.name,
+      body: '',
+    }
+    let reader = new FileReader()
+    reader.onload = fr => {
+      userFile['body'] = fr.target.result
+      resolve(userFile)
+    }
+    reader.readAsDataURL(file)
+  })
+}

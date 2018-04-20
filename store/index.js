@@ -102,7 +102,6 @@ const createStore = () => {
         }
       },
       GET_MESSAGE (state, data) {
-        console.log(data)
         state.requestFailed = false
         state.requestInProgress = false
         state.message = data

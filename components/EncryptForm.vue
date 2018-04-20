@@ -47,6 +47,7 @@
       <div class="main__files">
         <div
           v-for="file in files"
+          v-bind:key="file.id"
           class="main__file file-load"
         >
           <span
@@ -69,6 +70,7 @@
         </div>
         <div
           v-for="file in errorFiles"
+          v-bind:key="file.id"
           class="file-load__load file-load__load--error"
         >
           <div class="file-load__load-left">
@@ -174,6 +176,8 @@
 </template>
 
 <script>
+  import worker from 'workerize-loader!../utils/worker'
+
   import Vue from 'vue'
   import generatePassword from 'password-generator'
   import File from '~/components/File.vue'
@@ -182,6 +186,8 @@
   import 'vue-multiselect/dist/vue-multiselect.min.css'
   import 'assets/css/multiselect.css'
   import { mapState } from 'vuex'
+
+  let instance
 
   export default {
     props: ['formSubmitted'],
@@ -200,6 +206,9 @@
       'errorFiles': {},
       'customPassword': false,
     }),
+    mounted () {
+      instance = worker()
+    },
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode
@@ -243,20 +252,7 @@
         }
       },
       readFile: function (file) {
-        let files = this.files
-        let userFile = {
-          id: new Date().getTime(),
-          ext: file.name.split('.').pop(),
-          name: file.name,
-          body: '',
-        }
-
-        let reader = new FileReader()
-        reader.onload = function (readerEvt) {
-          userFile['body'] = readerEvt.target.result
-          Vue.set(files, userFile.id, userFile)
-        }
-        reader.readAsDataURL(file)
+        instance.readFile(file).then(userFile => Vue.set(this.files, userFile.id, userFile))
       },
       onFileError (file) {
         Vue.set(this.errorFiles, file.id, file)
