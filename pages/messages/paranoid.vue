@@ -62,16 +62,6 @@
         },
       }
     },
-    head: {
-      title: 'VENI, VIDI, ENCRYPTED',
-      meta: [
-        {charset: 'utf-8'},
-        {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      ],
-      script: [
-        {src: '/assets/custom.js'},
-      ],
-    },
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode

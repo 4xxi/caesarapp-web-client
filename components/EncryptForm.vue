@@ -176,8 +176,6 @@
 </template>
 
 <script>
-  import worker from 'workerize-loader!../utils/worker'
-
   import Vue from 'vue'
   import generatePassword from 'password-generator'
   import File from '~/components/File.vue'
@@ -186,8 +184,6 @@
   import 'vue-multiselect/dist/vue-multiselect.min.css'
   import 'assets/css/multiselect.css'
   import { mapState } from 'vuex'
-
-  let instance
 
   export default {
     props: ['formSubmitted'],
@@ -206,9 +202,6 @@
       'errorFiles': {},
       'customPassword': false,
     }),
-    mounted () {
-      instance = worker()
-    },
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode
@@ -245,14 +238,6 @@
       },
       postMessage: function (data) {
         this.$emit('form-submitted', data)
-      },
-      handleFile: function (files) {
-        for (let i = 0, f; (f = files[i]); i++) {
-          this.readFile(f)
-        }
-      },
-      readFile: function (file) {
-        instance.readFile(file).then(userFile => Vue.set(this.files, userFile.id, userFile))
       },
       onFileError (file) {
         Vue.set(this.errorFiles, file.id, file)

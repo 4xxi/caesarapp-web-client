@@ -1,4 +1,6 @@
 import sjcl from 'sjcl'
+import uuidv4 from 'uuid/v4'
+
 export function encrypt (data) {
   return btoa(sjcl.encrypt(data['password'], JSON.stringify({
     'secretMessage': data['secretMessage'],
@@ -17,7 +19,7 @@ export async function decrypt (password, encryptedData) {
 export async function readFile (file) {
   return new Promise((resolve, reject) => {
     let userFile = {
-      id: new Date().getTime(),
+      id: uuidv4(),
       ext: file.name.split('.').pop(),
       name: file.name,
       body: '',
