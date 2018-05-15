@@ -5,8 +5,8 @@
         <div class="container__inner">
           <header>
             <div class="header page__header">
-              <Logo v-if="!isDecrypted" />
-              <LogoAve v-else />
+              <Logo v-if="!isDecrypted"/>
+              <LogoAve v-else/>
             </div>
           </header>
           <main>
@@ -40,10 +40,9 @@
   import EnterPasswordForm from '~/components/EnterPasswordForm.vue'
   import PageFooter from '~/components/PageFooter.vue'
   import GoToUrlResParanoid from '~/components/DecryptedResult.vue'
+  import worker from 'workerize-loader!../../utils/worker'
   // import action from '../../utils/action'
 
-  import worker from 'workerize-loader!../../utils/worker'
-  
   let instance
 
   export default {
@@ -54,24 +53,24 @@
         errorMessage: '',
         modalMessage: {
           link: 'https://4xxi.com',
-          password: ''
+          password: '',
         },
-        message: null
+        message: null,
       }
     },
     computed: {
       encryptedMessage () {
-        return this.$store.state.message.encryptedMessage
+        return this.$store.state.message.message
       },
       isDecrypted () {
         return this.message
-      }
+      },
     },
     mounted () {
       instance = worker()
     },
     methods: {
-      onFormSubmit ({ password }) {
+      onFormSubmit ({password}) {
         instance.decrypt(password, this.encryptedMessage).then((message) => {
           if (message.hasOwnProperty('secretMessage')) {
             this.$store.dispatch('decrypted', message)
@@ -106,13 +105,13 @@
     },
     validate ({params}) {
       // Must be a number
-      return /^\w{32}$/.test(params.id)
+      return /^\w{40}$/.test(params.id)
     },
-    async fetch ({ store, params, error }) {
+    async fetch ({store, params, error}) {
       try {
         await store.dispatch('readMessage', params.id)
       } catch (e) {
-        error({ statusCode: 404, message: e.statusText })
+        error({statusCode: 404, message: e.statusText})
       }
     },
     components: {
@@ -121,8 +120,8 @@
       ModeTrigger,
       EnterPasswordForm,
       PageFooter,
-      GoToUrlResParanoid
-    }
+      GoToUrlResParanoid,
+    },
   }
 </script>
 

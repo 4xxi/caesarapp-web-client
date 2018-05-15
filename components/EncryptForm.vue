@@ -22,6 +22,7 @@
           </label>
           <div class="drop-file__row">
                   <textarea
+                    ref="message"
                     required v-model="secretMessage"
                     id="text"
                     cols="30"
@@ -92,13 +93,13 @@
             <div class="expires__title web-textlabel-18">Data Expires After</div>
             <multiselect
               id="expires-hours" class="expires__select select" name="expires_at" placeholder="Select one"
-              v-model="minutesLimit"
+              v-model="secondsLimit"
               label="name"
               :searchable="false"
               :allow-empty="false"
               :close-on-select="true"
               :show-labels="false"
-              :options="limits.minutesLimit">
+              :options="limits.secondsLimit">
             </multiselect>
           </div>
           <div class="expires__select-wrap expires__select-wrap--limits">
@@ -184,18 +185,17 @@
   import 'vue-multiselect/dist/vue-multiselect.min.css'
   import 'assets/css/multiselect.css'
   import { mapState } from 'vuex'
-
   export default {
     props: ['formSubmitted'],
     data: () => ({
       'secretMessage': '',
-      'minutesLimit': {
+      'secondsLimit': {
         'name': '10 minutes',
-        'value': 10,
+        'value': 600,
       },
       'queriesLimit': {
         'name': 'No limit',
-        'value': -1,
+        'value': 10000000// <---- I blame @smirik for this govnokod
       },
       'password': '',
       'files': {},
@@ -230,7 +230,7 @@
           'secretMessage': this.$data['secretMessage'],
           'password': this.$data['password'] || generatePassword(),
           'files': this.$data['files'],
-          'minutesLimit': this.$data['minutesLimit'],
+          'secondsLimit': this.$data['secondsLimit'],
           'queriesLimit': this.$data['queriesLimit'],
         }
         this.postMessage(postData)

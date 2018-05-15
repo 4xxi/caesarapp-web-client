@@ -83,7 +83,7 @@
         axios.post(process.env.baseApiUrl + `/api/messages`,
           {
             'encryptedMessage': btoa(encryptedMessage),
-            'minutesLimit': data['minutesLimit']['value'],
+            'secondsLimit': data['secondsLimit']['value'],
             'queriesLimit': data['queriesLimit']['value'],
           },
         ).then(response => {

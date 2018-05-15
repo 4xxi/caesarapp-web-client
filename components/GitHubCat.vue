@@ -1,6 +1,6 @@
 <template>
   <a
-    href="https://github.com/4xxi/caesarapp-server"
+    href="https://github.com/4xxi/caesarapp"
     class="github-corner"
     aria-label="View source on Github"
   >

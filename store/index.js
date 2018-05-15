@@ -13,30 +13,32 @@ const createStore = () => {
       throwFilesCounter: 0,
       requestInProgress: false,
       encryptedResult: {},
-      message: {}
+      message: {},
     },
     getters: {
       files: (state, getters) => {
         return state.message.files || {}
-      }
+      },
     },
     actions: {
-      createMessage ({ commit }, params) {
-        return api.post(this.$env.BASE_API_URL + `/api/messages`, params)
-          .then((response) => commit(action.CREATED_MESSAGE, response.data))
-          .catch((error) => commit(action.API_FAILURE, error))
+      createMessage ({commit, state}, params) {
+        if (state.privateMode) {
+          return new Promise((resolve, reject) => {
+            try {
+              commit(action.CREATED_PARANOID_MESSAGE, params.message)
+              resolve()
+            } catch (e) {
+              reject(e)
+            }
+          })
+        } else {
+          return api
+            .post(this.$env.BASE_API_URL + `/api/messages`, params)
+            .then((response) => commit(action.CREATED_MESSAGE, response.data))
+            .catch((error) => commit(action.API_FAILURE, error))
+        }
       },
-      createParanoidMessage ({ commit }, params) {
-        return new Promise((resolve, reject) => {
-          try {
-            commit(action.CREATED_PARANOID_MESSAGE, params.encryptedMessage)
-            resolve()
-          } catch (e) {
-            reject(e)
-          }
-        })
-      },
-      readMessage ({ commit }, id) {
+      readMessage ({commit}, id) {
         return new Promise((resolve, reject) => {
           api.get(this.$env.BASE_API_URL + `/api/messages/` + id)
             .then((response) => {
@@ -48,18 +50,18 @@ const createStore = () => {
             })
         })
       },
-      applyPassword ({ commit }, password) {
+      applyPassword ({commit}, password) {
         commit(action.APPLY_PASSWORD, password)
       },
-      toggleMode ({ commit }, state) {
+      toggleMode ({commit, state}) {
         commit(action.TOGGLE_MODE, state)
       },
-      decrypted ({ commit }, data) {
+      decrypted ({commit}, data) {
         commit(action.DECRYPTED, data)
       },
-      REQUEST_IN_PROGRESS ({ commit }, inProgress) {
+      REQUEST_IN_PROGRESS ({commit}, inProgress) {
         commit(action.REQUEST_IN_PROGRESS, inProgress)
-      }
+      },
     },
     mutations: {
       REQUEST_IN_PROGRESS (state, inProgress) {
