@@ -106,20 +106,21 @@
         this.$store.dispatch('REQUEST_IN_PROGRESS', true)
         instance.encrypt(data).then((message) => {
           let encryptedMessage = {
-            'encryptedMessage': message,
-            'minutesLimit': data['minutesLimit']['value'],
-            'queriesLimit': data['queriesLimit']['value'],
+            'message': message,
+            'secondsLimit': data['secondsLimit']['value'],
+            'requestsLimit': data['queriesLimit']['value'],
           }
           this.$store.dispatch('applyPassword', data['password'])
-          if (this.$store.state.privateMode) {
-            this.$store.dispatch('createParanoidMessage', encryptedMessage).then(() => {
-              this.$router.push('/encrypted')
-            })
-          } else {
-            this.$store.dispatch('createMessage', encryptedMessage).then(() => {
-              this.$router.push('/encrypted')
-            })
-          }
+          this.$store.dispatch('createMessage', encryptedMessage).then(() => {
+            this.$router.push('/encrypted')
+          })
+          // if (this.$store.state.privateMode) {
+          //   this.$store.dispatch('createParanoidMessage', encryptedMessage).then(() => {
+          //     this.$router.push('/encrypted')
+          //   })
+          // } else {
+          //
+          // }
         })
       },
       showModalMessage (id, password) {
