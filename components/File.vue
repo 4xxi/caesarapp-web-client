@@ -31,9 +31,10 @@
   </div>
 </template>
 <script>
-  import Vue from 'vue'
   import filesizeParser from 'filesize-parser'
+  import worker from 'workerize-loader!../utils/worker'
 
+  let instance
   export default {
     props: ['max-size'],
     data () {
@@ -43,6 +44,9 @@
     },
     created () {
       this.maxSizeInBtyes = filesizeParser(this.maxSize)
+    },
+    mounted () {
+      instance = worker()
     },
     computed: {
       isParanoiaOn () {
@@ -67,37 +71,17 @@
         e.target.value = ''
       },
       handleFile (files) {
-        for (let i = 0, f; (f = files[i]); i++) {
-          if (f.size >= this.maxSizeInBtyes) {
-            this.makeErrorFile(f)
-          } else {
-            this.readFile(f)
-          }
-        }
+        let filesKeys = Object.keys(files)
+        filesKeys.filter(k => files[k].size <= this.maxSizeInBtyes).map(k => this.readFile(files[k]))
+        filesKeys.filter(k => files[k].size > this.maxSizeInBtyes).map(k => this.makeErrorFile(files[k]))
       },
       makeErrorFile (file) {
         file.error = 'Size limit ' + this.maxSize
         this.$emit('file-error', file)
       },
-      readFile (file) {
-        let userFile = {
-          id: new Date().getTime(),
-          ext: file.name.split('.').pop(),
-          name: file.name,
-          body: '',
-        }
-
-        let reader = new FileReader()
-        let that = this
-        reader.onload = function (readerEvt) {
-          userFile['body'] = readerEvt.target.result
-          that.$emit('file-added', userFile)
-        }
-        reader.readAsDataURL(file)
-      },
-      removeFile (id) {
-        Vue.delete(this.files, id)
-      },
+      readFile: function (file) {
+        instance.readFile(file).then(userFile => this.$emit('file-added', userFile))
+      }
     },
   }
 </script>

@@ -5,15 +5,16 @@
         <div class="container__inner">
           <header>
             <div class="header page__header">
-              <Logo v-if="!doIKnowTheSecret" />
-              <LogoAve v-else />
+              <Logo v-if="!isDecrypted"/>
+              <LogoAve v-else/>
             </div>
           </header>
           <main>
             <div class="main page__main">
               <div class="main_wrapper">
                 <EnterPasswordForm
-                  v-if="!doIKnowTheSecret"
+                  v-if="!isDecrypted"
+                  v-bind:error-message="errorMessage"
                   @form-submitted="onFormSubmit"
                 >
                 </EnterPasswordForm>
@@ -39,53 +40,50 @@
   import EnterPasswordForm from '~/components/EnterPasswordForm.vue'
   import PageFooter from '~/components/PageFooter.vue'
   import GoToUrlResParanoid from '~/components/DecryptedResult.vue'
+  import worker from 'workerize-loader!../../utils/worker'
+  // import action from '../../utils/action'
 
-  import sjcl from 'sjcl'
+  let instance
 
   export default {
     data () {
       return {
         progress: false,
         showMessage: '',
-        error: '',
-        encryptedMessage: null,
+        errorMessage: '',
         modalMessage: {
           link: 'https://4xxi.com',
-          password: ''
+          password: '',
         },
-        secret: {}
+        message: null,
       }
-    },
-    head: {
-      title: 'VENI, VIDI, ENCRYPTED',
-      meta: [
-        {charset: 'utf-8'},
-        {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      ],
-      script: [
-        {src: '/assets/custom.js'},
-      ],
     },
     computed: {
-      doIKnowTheSecret () {
-        return Object.keys(this.secret).length
-      }
+      encryptedMessage () {
+        return this.$store.state.message.message
+      },
+      isDecrypted () {
+        return this.message
+      },
+    },
+    mounted () {
+      instance = worker()
     },
     methods: {
-      onFormSubmit (pass) {
-        this.showMessage = this.decrypt(pass)
-        if (this.showMessage) {
-          this.$store.dispatch('decrypted', this.secret)
-        }
+      onFormSubmit ({password}) {
+        instance.decrypt(password, this.encryptedMessage).then((message) => {
+          if (message.hasOwnProperty('secretMessage')) {
+            this.$store.dispatch('decrypted', message)
+            this.message = true
+          } else {
+            this.errorMessage = 'Wrong password'
+          }
+        })
       },
-      decrypt (pass) {
-        try {
-          this.secret = JSON.parse(sjcl.decrypt(pass.password, atob(this.encryptedMessage)))
-          return true
-        } catch (e) {
-          this.error = e.message
-        }
-        return false
+      decrypt (password) {
+        return instance.decrypt(password, this.encryptedMessage).then((message) => {
+          this.message = message
+        })
       },
       showModalMessage (id, password) {
         let props = this.$router.resolve({
@@ -107,11 +105,14 @@
     },
     validate ({params}) {
       // Must be a number
-      return /^\w{32}$/.test(params.id)
+      return /^\w{40}$/.test(params.id)
     },
-    created () {
-      this.$store.dispatch('readMessage', this.$route.params.id)
-        .then(() => (this.encryptedMessage = this.$store.state.message.encryptedMessage))
+    async fetch ({store, params, error}) {
+      try {
+        await store.dispatch('readMessage', params.id)
+      } catch (e) {
+        error({statusCode: 404, message: e.statusText})
+      }
     },
     components: {
       Logo,
@@ -119,8 +120,8 @@
       ModeTrigger,
       EnterPasswordForm,
       PageFooter,
-      GoToUrlResParanoid
-    }
+      GoToUrlResParanoid,
+    },
   }
 </script>
 

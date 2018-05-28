@@ -22,6 +22,7 @@
           </label>
           <div class="drop-file__row">
                   <textarea
+                    ref="message"
                     required v-model="secretMessage"
                     id="text"
                     cols="30"
@@ -47,6 +48,7 @@
       <div class="main__files">
         <div
           v-for="file in files"
+          v-bind:key="file.id"
           class="main__file file-load"
         >
           <span
@@ -69,6 +71,7 @@
         </div>
         <div
           v-for="file in errorFiles"
+          v-bind:key="file.id"
           class="file-load__load file-load__load--error"
         >
           <div class="file-load__load-left">
@@ -90,13 +93,13 @@
             <div class="expires__title web-textlabel-18">Data Expires After</div>
             <multiselect
               id="expires-hours" class="expires__select select" name="expires_at" placeholder="Select one"
-              v-model="minutesLimit"
+              v-model="secondsLimit"
               label="name"
               :searchable="false"
               :allow-empty="false"
               :close-on-select="true"
               :show-labels="false"
-              :options="limits.minutesLimit">
+              :options="limits.secondsLimit">
             </multiselect>
           </div>
           <div class="expires__select-wrap expires__select-wrap--limits">
@@ -182,18 +185,17 @@
   import 'vue-multiselect/dist/vue-multiselect.min.css'
   import 'assets/css/multiselect.css'
   import { mapState } from 'vuex'
-
   export default {
     props: ['formSubmitted'],
     data: () => ({
       'secretMessage': '',
-      'minutesLimit': {
+      'secondsLimit': {
         'name': '10 minutes',
-        'value': 10,
+        'value': 600,
       },
       'queriesLimit': {
         'name': 'No limit',
-        'value': 0,
+        'value': 10000000// <---- I blame @smirik for this govnokod
       },
       'password': '',
       'files': {},
@@ -228,7 +230,7 @@
           'secretMessage': this.$data['secretMessage'],
           'password': this.$data['password'] || generatePassword(),
           'files': this.$data['files'],
-          'minutesLimit': this.$data['minutesLimit'],
+          'secondsLimit': this.$data['secondsLimit'],
           'queriesLimit': this.$data['queriesLimit'],
         }
         this.postMessage(postData)
@@ -236,27 +238,6 @@
       },
       postMessage: function (data) {
         this.$emit('form-submitted', data)
-      },
-      handleFile: function (files) {
-        for (let i = 0, f; (f = files[i]); i++) {
-          this.readFile(f)
-        }
-      },
-      readFile: function (file) {
-        let files = this.files
-        let userFile = {
-          id: new Date().getTime(),
-          ext: file.name.split('.').pop(),
-          name: file.name,
-          body: '',
-        }
-
-        let reader = new FileReader()
-        reader.onload = function (readerEvt) {
-          userFile['body'] = readerEvt.target.result
-          Vue.set(files, userFile.id, userFile)
-        }
-        reader.readAsDataURL(file)
       },
       onFileError (file) {
         Vue.set(this.errorFiles, file.id, file)

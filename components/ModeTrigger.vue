@@ -14,7 +14,7 @@
       </span>
     </div>
     <div
-      @click="$store.commit('TOGGLE_MODE')"
+      @click="$store.dispatch('toggleMode')"
       class="mode-trigger__trigger trigger"
     >
       <div

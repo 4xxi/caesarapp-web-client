@@ -67,16 +67,6 @@
       }
       this.$store.dispatch('REQUEST_IN_PROGRESS', false) // reset preloader
     },
-    head: {
-      title: 'VENI, VIDI, ENCRYPTED',
-      meta: [
-        {charset: 'utf-8'},
-        {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      ],
-      script: [
-        {src: '/assets/custom.js'},
-      ],
-    },
     computed: {
       isParanoiaOn () {
         return this.$store.state.privateMode
@@ -93,7 +83,7 @@
         axios.post(process.env.baseApiUrl + `/api/messages`,
           {
             'encryptedMessage': btoa(encryptedMessage),
-            'minutesLimit': data['minutesLimit']['value'],
+            'secondsLimit': data['secondsLimit']['value'],
             'queriesLimit': data['queriesLimit']['value'],
           },
         ).then(response => {

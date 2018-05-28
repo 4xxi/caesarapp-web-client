@@ -92,6 +92,12 @@
       color: #b3b3b3;
       color: var(--grey);
     }
+
+    &-error {
+      font-size: 14px;
+      letter-spacing: 0.6px;
+      color: var(--errors);
+    }
   }
 
   &__link-wrap {
