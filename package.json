@@ -43,5 +43,8 @@
     "postcss-nested": "^3.0.0",
     "postcss-scss": "^1.0.3",
     "precss": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=8"
   }
 }
